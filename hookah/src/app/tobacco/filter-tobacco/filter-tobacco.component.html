@@ -1,0 +1,162 @@
+<!--<?php-->
+
+<!--/** @var $data */-->
+<!--$enablePriceCat = Yii::$app->settings->fetch('enableSellingByPriceCategory') ?? 0;-->
+
+<!--?>-->
+
+<section class="scrollSection" id="filterTobacco">
+    <header><div class="back"></div><span>Фильтрация табаков</span></header>
+    <ul class="filter">
+        <!--<?php if(!empty($data['brands']) && sizeof($data['brands']) > 1): ?>-->
+        <li *ngIf="filters.brands.length"
+            (click)="brandHeight = brandHeight ? 0 : brandList.scrollHeight; isOpenBrand = !isOpenBrand;"
+            class="brand">
+            <span>Бренд</span>
+            <div [ngClass]="{rotate: isOpenBrand}" class="downArrow"></div>
+            <ul [ngClass]="{slideDown: isOpenBrand}"
+                [ngStyle]="{height: brandHeight + 'px'}"
+                #brandList>
+                <!--<?php foreach( $data['brands'] as $keyBrand => $brand): ?>-->
+                <li *ngFor="let brand of filters.brands"
+                    class="filterItem"
+                    brand-id="<?=$keyBrand; ?>">{{brand.title}}</li>
+                <!--<?php endforeach;?>-->
+            </ul>
+        </li>
+        <!--<?php endif; ?>-->
+        <!--<?php if(!empty($data['flavours']) && sizeof($data['flavours']) > 1): ?>-->
+        <li *ngIf="filters.flavours.length"
+            (click)="tasteHeight = tasteHeight ? 0 : tasteList.scrollHeight; isOpenTaste = !isOpenTaste;"
+            class="taste">
+            <span>Вкус</span>
+            <div [ngClass]="{rotate: isOpenTaste}" class="downArrow"></div>
+            <ul [ngClass]="{slideDown: isOpenTaste}"
+                [ngStyle]="{height: tasteHeight + 'px'}"
+                #tasteList>
+                <!--<?php foreach( $data['flavours'] as $keyFlavour => $flavour): ?>-->
+                <!--<?php if(!empty($flavour)): ?>-->
+                <li *ngFor="let taste of filters.flavours"
+                    class="filterItem">{{taste.title}}</li>
+                <!--<?php endif;?>-->
+                <!--<?php endforeach;?>-->
+            </ul>
+        </li>
+        <!--<?php endif; ?>-->
+        <!--<?php if(!empty($data['priceCategories']) && sizeof($data['priceCategories']) > 1): ?>-->
+        <li *ngIf="isSetPrice" class="price">
+            <span>Цена</span>
+            <div class="downArrow"></div>
+            <ul>
+                <!--<?php foreach($data['priceCategories'] as $keyCategory => $category): ?>-->
+                <!--<?php if(!empty($category['category'])): ?>-->
+                <!--<?php if($enablePriceCat): ?>-->
+                <li class="filterItem" category-id="<?=$keyCategory; ?>"><?= Yii::$app->lng->word($category['category']).', '. ceil($category['price']) . ' грн.' ?></li>
+                <!--<?php else:?>-->
+                <li class="filterItem" category-id="<?=$keyCategory; ?>"><?= Yii::$app->lng->word($category['category']) ?></li>
+                <!--<?php endif;?>-->
+                <!--<?php endif;?>-->
+                <!--<?php endforeach;?>-->
+            </ul>
+        </li>
+        <!--<?php endif; ?>-->
+        <li class="popular getTobacco">
+            <span>Популярное</span>
+            <div class="rightArrow"></div>
+        </li>
+    </ul>
+    <!--<?php if(isset($data['tobaccos'])): ?>-->
+    <footer *ngIf="isSetTobacco"
+            class="filterTobaccoResult getTobacco">Показать <span>{{filters.tobaccos.length}}</span> табаков</footer>
+    <!--<?php endif; ?>-->
+    <!--<script>-->
+        <!--var tList = <?= json_encode($data['tobaccos'] ?? []) ?>;-->
+        <!--var tPopular = <?= json_encode($data['popularTobaccos'] ?? []) ?>;-->
+
+        <!--var TobaccoFilter = {-->
+            <!--hundlers: {-->
+                <!--"ul.filter li:click"            : function(e){ TobaccoFilter.addFilter(e, this); }, // Скрыть отобразить фильтра (бренд, вкус, цен.категория)-->
+                <!--".filterItem:click"             : function() { TobaccoFilter.filterTobacco(this); },  // Выбор фильтра-->
+                <!--"[data-popularity]:click"       : function() { TobaccoFilter.showPopularTobaccos(this); },-->
+                <!--".filterTobaccoResult:click"    : function() { var list = $('#tobaccoList'); list.find('.tobacco').removeClass('notPopular'); list.find('.search').show(); },-->
+                <!--".getTobacco:click"             : function() { TobaccoFilter.getTobacco(this); }, // Выбор крепости-->
+            <!--},-->
+            <!--getTobacco: function(btn) {-->
+                <!--var fd = new FormData();-->
+                <!--fd.append('ajReqMeth', 'getTobaccoList');-->
+                <!--if (btn.classList.contains('popular')) {-->
+<!--//                    APP.whenceTobacco = 'popular';-->
+                    <!--fd.append('tobaccos', JSON.stringify(tPopular));-->
+                <!--} else {-->
+<!--//                    APP.whenceTobacco = 'filter';-->
+                    <!--fd.append('tobaccos', JSON.stringify(APP.showTobaccoId));-->
+                <!--}-->
+                <!--Rqst.post({url: '/tobacco-list', writeHistory: true, data: fd});-->
+            <!--},-->
+            <!--ready: function () {-->
+                <!--for (var bId = 0; bId < APP.filter.brand.length; bId++) {-->
+                    <!--$('[brand-id="'+ APP.filter.brand[bId] +'"]').addClass('selected');-->
+                <!--}-->
+                <!--for (var tId = 0; tId < APP.filter.taste.length; tId++) {-->
+                    <!--$('[flavour-id="'+ APP.filter.taste[tId] +'"]').addClass('selected');-->
+                <!--}-->
+                <!--for (var pId = 0; pId < APP.filter.price.length; pId++) {-->
+                    <!--$('[category-id="'+ APP.filter.price[pId] +'"]').addClass('selected');-->
+                <!--}-->
+                <!--if (APP.filter.brand.length || APP.filter.taste.length|| APP.filter.price.length) {-->
+                    <!--$('.filterTobaccoResult span').text(APP.showTobaccoId.length);-->
+                <!--}-->
+            <!--},-->
+            <!--addFilter: function (e, li) {-->
+                <!--$(li).find('ul').slideToggle(300);-->
+                <!--$(li).find('.downArrow').toggleClass('rotate');-->
+                <!--e.stopPropagation();-->
+            <!--},-->
+            <!--filterTobacco: function(el) {-->
+                <!--APP.tobacco = {};  // Если изменилось состояние фильтра очищаем выбранные табаки-->
+                <!--$(el).toggleClass('selected');-->
+                <!--var showBrandArr = [];-->
+                <!--var showTasteArr = [];-->
+                <!--var showPriceCat = [];-->
+                <!--$('.brand li.selected').each(function (index, elem) {-->
+                    <!--showBrandArr.push($(elem).attr('brand-id'));-->
+                <!--});-->
+                <!--$('.taste li.selected').each(function (index, elem) {-->
+                    <!--showTasteArr.push($(elem).attr('flavour-id'));-->
+                <!--});-->
+                <!--$('.price li.selected').each(function (index, elem) {-->
+                    <!--showPriceCat.push($(elem).attr('category-id'));-->
+                <!--});-->
+                <!--TobaccoFilter.addToAPP(showBrandArr, showTasteArr, showPriceCat);-->
+            <!--},-->
+            <!--// ПЕРЕРАБОТАТЬ-->
+            <!--showPopularTobaccos: function (btn) {-->
+                <!--var popularArr = $(btn).attr('data-popularity').split(',');-->
+                <!--var list = $('#tobaccoList');-->
+                <!--list.find('.search').hide();-->
+                <!--list.find('.tobacco').each(function () {-->
+                    <!--var isPopular = popularArr.indexOf( $(this).attr('tobacco-id') );-->
+                    <!--if (isPopular === -1) {-->
+                        <!--$(this).addClass('notPopular');-->
+                    <!--}-->
+                <!--});-->
+            <!--},-->
+            <!--addToAPP: function (showBrandArr, showTasteArr, showPriceCat) {-->
+                <!--var tobaccoId = [];-->
+                <!--for (var i = 0; i < tList.length; i++) {-->
+                    <!--var isBrand = showBrandArr.indexOf(tList[i].brand_id) !== -1 || !showBrandArr.length;-->
+                    <!--var isFlavour = showTasteArr.indexOf(tList[i].flavour_id) !== -1 || !showTasteArr.length;-->
+                    <!--var isCategory = showPriceCat.indexOf(tList[i].category_id) !== -1 || !showPriceCat.length;-->
+                    <!--if(isBrand && isFlavour && isCategory) {-->
+                        <!--tobaccoId.push(tList[i].tobacco_id);-->
+                    <!--}-->
+                <!--}-->
+                <!--APP.filter.brand = showBrandArr;-->
+                <!--APP.filter.taste = showTasteArr;-->
+                <!--APP.filter.price = showPriceCat;-->
+                <!--APP.showTobaccoId = tobaccoId;-->
+                <!--$('.filterTobaccoResult span').text(tobaccoId.length);-->
+            <!--},-->
+        <!--}-->
+    <!--</script>-->
+</section>

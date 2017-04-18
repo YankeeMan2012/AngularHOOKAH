@@ -1,0 +1,125 @@
+header{
+	background-color: #fafafa; height: 10vh; border-bottom: 1px solid #f5f5f5; text-align: center; line-height: 10vh;
+	position: relative;
+	.back{
+		background: url(assets/img/domain/back.svg) 70% center no-repeat;
+		background-size: 45%;position: absolute;width: 4vh;height: 10vh;
+		padding-left: 6vh;
+		z-index: 10;
+	}
+	.homeIcon{
+		background: url(assets/img/domain/home.svg) 70% center no-repeat;
+		background-size: 45%;position: absolute;width: 4vh;height: 10vh;
+		padding-left: 6vh;
+		z-index: 10;
+	}
+	.search{
+		background: url(assets/img/domain/search.svg) 70% center no-repeat;
+		background-size: 45%;position: absolute;width: 4vh;height: 10vh;
+		padding-left: 6vh; right: 2vh; top: 0;
+		z-index: 10;
+	}
+	span{
+		text-transform: uppercase; color: #bd9d5e;font-family: 'MyriadProSemibold', sans-serif; position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		line-height: 6vw;
+		height: 10vh;
+	}
+	.viewMain, .viewSearch {
+		display: none;
+	}
+	.visible {
+		display: block;
+	}
+	.viewSearch {
+		position: relative;
+		.searchInput {
+			background: #fafafa;
+			width: 90vw;
+			padding: 1vw 8vw 1vw 4vw;
+			box-sizing: border-box;
+			height: 5vh;
+			border: 1px solid #bd9d5e;
+			border-radius: 1vw;
+			outline: none;
+			color: #9d9a99;
+			font: 2.8vh/2.8vh MyriadProRegular;
+			margin: 2.5vh 0;
+		}
+		.closeBtn {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 10vh;
+			height: 10vh;
+			background: url(assets/img/domain/close-bronze.svg) center center no-repeat;
+		}
+	}
+	.globalPrice {
+		color: #b6d1f1;
+		width: 30%;
+		height: 26px;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 4%;
+		vertical-align: top;
+		background-size: 16px;
+		text-align: right;
+		font: 15px/26px MyriadProBold, sans-serif;
+	}
+}
+footer{
+	background-color: #fafafa;
+	height: 10vh;
+	border-top: 1px solid #f5f5f5;
+	text-align: center;
+	line-height: 10vh;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	text-transform: uppercase;
+}
+
+@media screen and (max-height: 510px){
+	header{
+		font-size: 11px;
+		.globalPrice {
+			font-size: 16px;
+			line-height: 26px;
+			background-size: 12px;
+		}
+		.viewSearch {
+			.closeBtn {
+				right: 5px;
+			}
+		}
+		span{
+			line-height: 14px;
+		}
+	}
+}
+@media screen and (min-height: 900px){
+	header{
+		font-size: 26px;
+		.globalPrice {
+			font-size: 26px;
+			line-height: 26px;
+			background-size: 17px;
+		}
+		.viewSearch {
+			.closeBtn {
+				right: 12px;
+				background-size: 26px;
+			}
+		}
+		span{
+			line-height: 32px;
+		}
+	}
+	footer{
+		font-size: 26px;
+	}
+}

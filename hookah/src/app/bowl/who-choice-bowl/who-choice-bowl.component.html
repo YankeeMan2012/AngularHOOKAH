@@ -1,0 +1,22 @@
+<section id="whoChoiceBowl" class="whoChoice">
+    <header><div class="back" (click)="back()"></div><span>Кто выберет чашу?</span></header>
+    <ul>
+        <li routerLink="/who-choice-bowl-lid" class="tapEffect hkDiscretionBowl" data-clearStorage="bowl">
+            <h2>На усмотрение кальянщика</h2>
+            <p>Наш кальянщик сам выбирает чашу</p>
+        </li>
+        <li routerLink="/choice-bowl" class="tapEffect">
+            <h2>Я выберу чашу сам</h2>
+            <p>Чашу выберете лично Вы!</p>
+        </li>
+    </ul>
+    <!--<script>-->
+    <!--var WhoChoiceBowl = {-->
+    <!--hundlers: {-->
+    <!--".hkDiscretionBowl:click"  : function() {-->
+    <!--AppJS.priceBowl = 0;-->
+    <!--},-->
+    <!--}-->
+    <!--}-->
+    <!--</script>-->
+</section>

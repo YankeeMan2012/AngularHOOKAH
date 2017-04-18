@@ -1,0 +1,73 @@
+#preloader {
+	//height: 100%;
+	height: 100vh;
+	width: 100%;
+	background-color: #fafafa;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	display: block;
+	overflow: hidden;
+	h2 {
+		font: 10vw/10vw MyriadProBold, sans-serif;
+		text-transform: uppercase;
+		text-align: center;
+		margin: 0 auto;
+		padding: 30vw 0 8vw;
+	}
+	.wrapper {
+		width: 100%;
+		height: 55%;
+		margin: 0 auto;
+		.hookah {
+			width: 100%;
+			height: 130%;
+			text-align: center;
+			margin-left: 4vw;
+			.cls-1 {
+				stroke: #bd9d5e;
+				stroke-width: 4px;
+				fill: none;
+				fill-rule: evenodd;
+			}
+			#housing {
+				stroke-dasharray: 1270;
+				stroke-dashoffset: 1270;
+				transition: all ease 3s;
+			}
+			#tube {
+				stroke-dasharray: 870;
+				stroke-dashoffset: 870;
+				transition: all ease 3s;
+			}
+			#mouthpiece {
+				stroke-dasharray: 385;
+				stroke-dashoffset: 385;
+				transition: all ease 3s;
+			}
+			.line {
+				transition: all ease 1s 2s;
+				opacity: 0;
+			}
+			&.animate {
+				#housing {
+					stroke-dashoffset: 0;
+				}
+				#tube {
+					stroke-dashoffset: 0;
+				}
+				#mouthpiece {
+					stroke-dashoffset: 0;
+				}
+				.line {
+					opacity: 1;
+				}
+			}
+		}
+	}
+	#preloaderPercent {
+		text-align: center;
+		font: 8vw/8vw MyriadProRegular, sans-serif;
+	}
+}

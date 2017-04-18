@@ -1,0 +1,301 @@
+.choiceSectionClass{
+	display: block;
+	overflow-x: hidden;
+	.subHeader{
+		padding-top: 2vw;
+		height: 8vh;
+		.bowlOrFruit{ float: left; margin-left: 4vw;}
+		.sliderOrTile{ float: right; margin-right: 4vw;}
+		span{ font-size: 6vw; line-height: 2; vertical-align: middle; color: #bd9d5e;}
+	}
+	.showBowl{
+		background: url(/img/domain/bowl.svg) center center / contain no-repeat;
+		&.active{background: url(/img/domain/bowl-bronze.svg) center center / contain no-repeat;}
+	}
+	.showBowlFruit{
+		background: url(/img/domain/apple.svg) center center / contain no-repeat;
+		&.active{background: url(/img/domain/apple-bronze.svg) center center / contain no-repeat;}
+	}
+	.sliderView{
+		background: url(/img/domain/slider.svg) center center / contain no-repeat;
+		&.active{background: url(/img/domain/slider-bronze.svg) center center / contain no-repeat;}
+	}
+	.tileView{
+		background: url(/img/domain/tile.svg) center center / contain no-repeat;
+		&.active{background: url(/img/domain/tile-bronze.svg) center center / contain no-repeat;}
+	}
+	i{ display: inline-block; width: 6vw; height: 6vw; margin: 0 2vw; vertical-align: middle;}
+
+	.swiper-container {
+		width: 100%;padding-top: 5vw;height: 70vh;
+		.swiper-slide {
+			text-align: center; font-size: 18px; transition: all 500ms;
+			width: 80%; font-family: 'MyriadProLight', sans-serif;
+			p{transition: opacity 800ms; opacity: 1;}
+			p.name{
+				font-style: italic; font-size: 6vw;
+				font-family: 'MyriadProLight', sans-serif;
+				width: 80vw;margin-left: -12vw; margin-bottom: 3vw;
+			}
+			p.price{
+				color: #bd9d5e; font-size: 6vw;
+				//&:after{
+				//	content: ''; background: url(/img/domain/uah.svg) center center / contain no-repeat;
+				//	display: inline-block; width: 6vw; height: 5.5vw; vertical-align: top;
+				//}
+			}
+			p.description{ font-size: 4vw; line-height: 1.2; width: 80vw;margin-left: -12vw; margin-top: 5vw;}
+			.boxImg{
+				width: 100%;
+				height: 42vw;
+				position: relative;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+				overflow: hidden;
+				img{ height:  100%; width: auto;}
+				.noPhoto{
+					padding-top: 3vw;
+					width: 100%;
+					text-align: center;
+					font: 4vw/4vw MyriadProLight, sans-serif;
+					font-style: italic;
+					color: #bd9d5e;
+				}
+			}
+			&:not(.swiper-slide-active){
+				transform: scale(0.8);
+				p{opacity: 0;}
+			}
+			&:before, &:after{
+				content: ''; display: block; position: absolute;
+				background-color: #252525; top: 59vh; transition: all 200ms; right: 50%;
+			}
+			&:before{width: 2px; height: 20px; margin-top: 1px;}
+			&:after{ width: 20px;height: 2px;  margin-right: -9px; margin-top: 10px;}
+			&.selected{
+				&:before, &:after{ background-color: #bd9d5e;transform: rotate(0deg);}
+				&:after{ width: 12px; transform: translate(-12px,2px) rotate(47deg);}
+				&:before{transform: translateX(3px) rotate(45deg); }
+			}
+		}
+	}
+
+	.glide {
+		transform: translateZ(0);
+		width: 100%;
+		padding-top: 2vw;
+		height: 70vh;
+		box-sizing: border-box;
+		opacity: 0;
+		transition: opacity .2s linear .3s;
+		&.showSlider {
+			opacity: 1;
+		}
+		&__track {
+			overflow: visible;
+			will-change: transform;
+		}
+		&__slide {
+			will-change: transform;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			transition: transform .3s;
+			height: 100%;
+			position: relative;
+			p {
+				width: 80vw;
+				transition: opacity 800ms;
+				opacity: 1;
+				text-align: center;
+			}
+			.name {
+				font-style: italic;
+				font-size: 6vw;
+				font-family: 'MyriadProLight', sans-serif;
+				text-align: center;
+				margin-bottom: 3vw;
+			}
+			.price {
+				color: #bd9d5e;
+				font-size: 6vw;
+				margin-bottom: 3vw;
+			}
+			.boxImg {
+				width: 100%;
+				height: 45vw;
+				position: relative;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+				overflow: hidden;
+				img {
+					height:  100%;
+					width: auto;
+				}
+				.noPhoto {
+					padding-top: 3vw;
+					width: 100%;
+					text-align: center;
+					font: 4vw/4vw MyriadProLight, sans-serif;
+					font-style: italic;
+					color: #bd9d5e;
+				}
+
+			}
+			.description {
+				font-size: 4vw;
+				line-height: 1.2;
+				text-align: center;
+				margin-top: 5vw;
+			}
+			&.inOrder {
+				color: #b6b3b2;
+				.price {
+					color: #b6b3b2;
+				}
+				.boxImg {
+					img {
+						opacity: .7;
+					}
+				}
+				&:before {
+					display: none;
+				}
+				&:after {
+					content: 'Продукт временно недоступен';
+					transform: none;
+					top: auto !important;
+					bottom: 50px;
+					background: none;
+					text-align: center;
+					left: 0;
+					width: 100%;
+					font: 4vw/4vw MyriadProLight, sans-serif;
+				}
+			}
+			&:not(.active){
+				transform: scale(0.8);
+				p {
+					opacity: 0;
+				}
+			}
+			&:before, &:after{
+				content: ''; display: block; position: absolute;
+				background-color: #252525;
+				top: 62vh;
+				transition: all 200ms;
+				z-index: 10;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+			&:before{width: 2px; height: 20px; margin-top: 1px;}
+			&:after{ width: 20px;height: 2px;  margin-right: -9px; margin-top: 10px;}
+			&.selected{
+				&:before, &:after{ background-color: #bd9d5e;transform: rotate(0deg);}
+				&:after{ width: 12px; transform: translate(-12px,2px) rotate(47deg);}
+				&:before{transform: translateX(4px) rotate(45deg); }
+			}
+		}
+	}
+
+	&.cardView {
+		.glide {
+			width: 100%;
+			padding-top: 2vw;
+			height: 70vh;
+			box-sizing: border-box;
+			&__track {
+				overflow: visible;
+				box-sizing: border-box;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				padding: 0 5vw 10vh 5vw;
+				height: auto;
+			}
+			&__slide {
+				width: 47% !important;
+				height: 34vh;
+				margin-bottom: 5%;
+				transition: initial;
+				position: relative;
+				box-shadow: 0 0 10px 5px rgba(0,0,0,.05);
+				&.selected {
+					transform: scale(1.03) !important;
+				}
+				p {
+					width: 100%;
+					transition: opacity 800ms;
+					opacity: 1;
+					text-align: center;
+				}
+				.name {
+					padding: 1.4vh 0 1vh;
+					margin: 0;
+					box-sizing: border-box;
+					font-size: 3.6vw;
+				}
+				.price {
+					font-size: 3.6vw;
+					margin-bottom: .6vh;
+				}
+				.boxImg {
+					width: 100%;
+					height: 18vh;
+					.noPhoto {
+						padding: 1vw 0 0 0;
+						font: 3vw/4vw MyriadProLight, sans-serif;
+					}
+				}
+				.description {
+					display: none;
+				}
+				&.inOrder {
+					&:after {
+						font: 3vw/3vw MyriadProLight, sans-serif;
+					}
+				}
+				&:not(.active){
+					transform: initial;
+				}
+				&:before, &:after{
+					top: 82%;
+				}
+			}
+		}
+	}
+
+
+	footer{ display: none; z-index: 1;}
+	.static {
+		display: block;
+	}
+}
+
+@media screen and (min-width: 700px){
+	.choiceSectionClass {
+		.glide {
+			&__slide {
+				.boxImg {
+					height: 32vw;
+				}
+				.name {
+					font-size: 4.4vw;
+				}
+				.price {
+					font-size: 4.6vw;
+				}
+				.description {
+					font-size: 3vw;
+				}
+				&:before, &:after{
+					top: 56vh;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,122 @@
+#filterTobacco {
+	padding-bottom: 10vh;
+	> ul {
+		padding: 5vh 0;
+		> li {
+			position: relative;
+			.downArrow {
+				position: absolute;
+				top: 10vw;
+				margin-right: -18px;
+				right: 35px;
+				height: 6vh;
+				width: 6vh;
+				vertical-align: bottom;
+				background: url(../../../assets/img/domain/down.svg) center center/50% no-repeat;
+				transition: all ease .3s;
+				&.rotate {
+					transform: rotate(-180deg);
+				}
+			}
+			.rightArrow {
+				@extend .downArrow;
+				transform: rotate(-90deg);
+			}
+			border-bottom: 1px solid #eaeaea;
+			padding: 6vh 6vh 0;
+			&:last-child {
+				border: none;
+			}
+			span {
+				display: inline-block;
+				font-size: 3.5vh;
+				line-height: 6vh;
+				text-transform: uppercase;
+				color: #707070;
+				margin-bottom: 6vh;
+			}
+			span:before {
+				content: '';
+				display: inline-block;
+				margin-right: 3vh;
+				height: 6vh;
+				width: 6vh;
+				vertical-align: bottom;
+			}
+			&.brand span:before {
+				color: #9d9a99;
+				content: 'A';
+				font-family: 'MyriadProLight', sans-serif;
+				font-size: 6vh;
+				text-align: center;
+			}
+			&.taste span:before {
+				background: url(../../../assets/img/domain/apple.svg) center center no-repeat;
+				background-size: 85%;
+			}
+			&.price span:before {
+				background: url(../../../assets/img/domain/dollar-sing.svg) center center no-repeat;
+				background-size: 120%;
+			}
+			&.popular span:before {
+				background: url(../../../assets/img/domain/star.svg) center center no-repeat;
+				background-size: 80%;
+			}
+
+			> ul {
+				//border-top: 1px solid #eaeaea;
+				margin: 0 -6vh;
+				transition: height .2s linear;
+				height: 0;
+				overflow: hidden;
+				//display: none;
+				&.slideDown {
+					//height: auto;
+					border-top: 1px solid #eaeaea;
+					//display: block;
+				}
+				> li {
+					position: relative;
+					color: #252525;
+					line-height: 8.5vh;
+					padding: 0 11vh;
+					font-size: 3vh;
+					text-transform: uppercase;
+					&:before, &:after {
+						content: '';
+						display: block;
+						position: absolute;
+						background-color: #252525;
+						bottom: 50%;
+						transition: all 200ms;
+						right: 35px;
+					}
+					&:before {
+						width: 2px;
+						height: 20px;
+						margin-bottom: -9px;
+					}
+					&:after {
+						width: 20px;
+						height: 2px;
+						margin-right: -9px;
+					}
+					&.selected {
+						background-color: #fafafa;
+						&:before, &:after {
+							background-color: #bd9d5e;
+							transform: rotate(0deg);
+						}
+						&:after {
+							width: 12px;
+							transform: translate(-12px, 2px) rotate(47deg);
+						}
+						&:before {
+							transform: translateX(3px) rotate(45deg);
+						}
+					}
+				}
+			}
+		}
+	}
+}

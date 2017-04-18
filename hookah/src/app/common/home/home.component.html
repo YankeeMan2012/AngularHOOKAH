@@ -1,0 +1,65 @@
+<section id="home">
+    <div class="head">
+        <div id="timerFlag"></div>
+        <div class="loginBtn">
+            <img src="./assets/img/domain/man.svg">
+            <a *ngIf="userId" routerLink="/account">Мой Аккаунт</a>
+            <a *ngIf="!userId" routerLink="/login">Войти</a>
+        </div>
+    </div>
+
+    <h1>{{home.hookah_bar}}</h1>
+    <div class="swiper-container main-swiper" [ngClass]="{show:showSlider}">
+        <div class="swiper-wrapper">
+            <div routerLink="{{home.empty ? '/empty-stuff' : '/who-choice-tobacco'}}"
+                 [ngClass]="{down:menu.hookah.down}"
+                 *ngIf="checkHookahMan && demoDomain"
+                 class="swiper-slide s1 tapEffect">
+                <div class="btn">Заказать кальян</div>
+            </div>
+            <div routerLink="/call-reason"
+                 [ngClass]="{down:menu.call.down}"
+                 *ngIf="checkHookahMan && demoDomain"
+                 class="swiper-slide s2 tapEffect">
+                <div class="btn">Позвать кальянщика</div>
+            </div>
+            <div routerLink="/bar"
+                 [ngClass]="{down:menu.bar.down}"
+                 *ngIf="home.bar_enabled"
+                 class="swiper-slide s5 tapEffect">
+                <div class="btn">Заказать напиток</div>
+            </div>
+            <div routerLink="/recall"
+                 [ngClass]="{down:menu.recall.down}"
+                 *ngIf="home.enableReviews"
+                 class="swiper-slide s3 tapEffect">
+                <div class="btn">Читать отзывы</div>
+            </div>
+            <div routerLink="/article"
+                 [ngClass]="{down:menu.article.down}"
+                 class="swiper-slide s4 tapEffect">
+                <div class="btn">Читать статьи</div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!--<script>-->
+        <!--var Home = {-->
+            <!--hundlers: {-->
+                <!--"#home .swiper-slide:touchstart" : function() { if(!$(this).hasClass('down')) $(this).addClass('down');  },-->
+                <!--"#home .swiper-slide:touchend"   : function() { $(this).removeClass('down'); },-->
+            <!--},-->
+            <!--ready: function () {-->
+                <!--new Swiper('.main-swiper', { // иниализация главного меню-->
+                    <!--pagination: '.swiper-pagination',-->
+                    <!--slidesPerView: 1.4,-->
+                    <!--centeredSlides: true,-->
+                    <!--paginationClickable: true,-->
+                    <!--spaceBetween: 20-->
+                <!--});-->
+                <!--setTimeout(function() {$('.swiper-container').addClass('show');}, 300); // Для плавного появления слайдов-->
+                <!--AppJS.recoverTimer();-->
+            <!--}-->
+        <!--};-->
+    <!--</script>-->
+</section>

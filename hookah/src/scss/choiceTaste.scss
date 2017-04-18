@@ -1,0 +1,32 @@
+#choiceTaste{
+	.taste{
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		box-shadow: 0 0 27px 5px rgba(0,0,0,.08); width: 90%; margin: 5vh auto 15vh;height: auto;
+		padding: 6.5vh 0; box-sizing: border-box;
+		h2{ text-transform: uppercase; color: #bd9d5e; font-weight: 100;margin-bottom: 1vh; padding: 0 6vh; font-size: 4.5vw;}
+		p{ color: #9d9d9d; font-size: 2.5vh; padding: 0 6vh;}
+		.btn{
+			white-space: nowrap;
+			overflow: hidden;
+			padding: 0 2vw;
+			margin: 8vw 15vw 0;
+			line-height: 12vw;
+			&.selected {
+				transition: all 200ms;
+				background-color: #bd9d5e;
+				color: #fff;
+			}
+		}
+	}
+	footer {
+		transition: all .2s linear;
+		transform: translateY(100%);
+		opacity: 0;
+		&.footerUp {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+}

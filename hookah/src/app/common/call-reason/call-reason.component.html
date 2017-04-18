@@ -1,0 +1,23 @@
+<section id="callReason">
+    <header><div class="homeIcon" routerLink="/home"></div></header>
+    <div class="wrapper">
+        <div *ngFor="let call of reasons" class="btn" (click)="callHookahMan(call.reason)">{{call.title}}</div>
+        <!--<div reason="charcoal" id="coal"          class="btn js-call" onclick="">Заменить уголь</div>-->
+        <!--<div reason="other"    id="anotherReason" class="btn js-call" onclick="">Другая причина</div>-->
+    </div>
+    <!--<script>-->
+        <!--var Call = {-->
+            <!--hundlers: {-->
+                <!--".js-call:click" : function() { Call.callHookaher(this); AppJS.goHome(); }, // Позвать кальянщика-->
+            <!--},-->
+            <!--callHookaher: function(el) {-->
+                <!--var fd = new FormData();-->
+                <!--fd.append('reason', $(el).attr('reason'));-->
+                <!--if(AppJS.clientName) fd.append('clientName', AppJS.clientName);-->
+                <!--fd.append('place', localStorage.tableNum);-->
+                <!--fd.append('ajReqMeth', 'callForAHookahMan');-->
+                <!--Rqst.post({url:'order', data: fd});-->
+            <!--},-->
+        <!--}-->
+    <!--</script>-->
+</section>

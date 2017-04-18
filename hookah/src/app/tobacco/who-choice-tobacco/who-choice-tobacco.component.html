@@ -1,0 +1,26 @@
+<section class="whoChoice" id="whoChoiceTobacco">
+    <header><div class="homeIcon" routerLink="/home" onclick=""></div><span>Кто выберет табак?</span></header>
+    <ul>
+        <li class="tapEffect hkDiscretionTobacco" routerLink="/choice-taste" data-clearStorage="tobacco">
+            <h2>На усмотрение кальянщика</h2>
+            <p>Наш кальянщик сам выбирает <br>в каком соотношении забить чашу</p>
+        </li>
+        <li class="tapEffect" routerLink="/filter-tobacco">
+            <h2>я выберу табак сам</h2>
+            <p>Соотношения табака в чаше определяете <br>лично Вы!</p>
+        </li>
+        <!--<?php if(!empty($data['mixes'])): ?>-->
+        <li *ngIf="mixes" class="tapEffect" routerLink="/tobacco-mixes">
+            <h2>Популярные миксы табаков</h2>
+            <p>Самые трендовые миксы табаков <br>в готовом соотношении</p>
+        </li>
+        <!--<?php endif; ?>-->
+    </ul>
+    <!--<script>-->
+        <!--var WhoChoiceTobacco = {-->
+            <!--hundlers: {-->
+                <!--".hkDiscretionTobacco:click"  : function() { AppJS.priceTobacco = 0; },-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+</section>

@@ -1,0 +1,104 @@
+#choiceTable {
+	text-align: center;
+	padding-top: 7vh;
+	display: block;
+	p {
+		color: #bd9d5e;
+		text-transform: uppercase;
+		font-size: 3vh;
+		font-family: 'MyriadProSemibold', sans-serif;
+		margin-bottom: 5vh;
+	}
+	.pseudoInput {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		height: 10vh;
+		line-height: 10vh;
+		font-size: 7vh;
+		font-family: 'MyriadProSemibold', sans-serif;
+		font-style: italic;
+		width: 55%;
+		margin: 0 auto 5vh;
+		border-bottom: 1px solid #dadada;
+		color: #bd9d5e;
+		span {
+			position: relative;
+			line-height: 5.5vh;
+			height: 5.5vh;
+			padding-right: 1.4vh;
+			&:after {
+				display: inline-block;
+				content: '';
+				height: 5.5vh;
+				width: 1px;
+				background-color: #bd9d5e;
+				position: absolute;
+				right: 0;
+				animation: cursor .8s linear infinite;
+			}
+		}
+	}
+	p.error {
+		font-size: 2vh;
+		position: absolute;
+		top: 26vh;
+		width: 100%;
+		color: red;
+	}
+	.btn {
+		padding: 0 20vw;
+		margin-bottom: 6vh;
+	}
+	.keyboard:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	.key {
+		width: 33.3%;
+		color: #9d9a99;
+		height: 13vh;
+		line-height: 13vh;
+		background-color: #fff;
+		border: 1px solid #f7f7f7;
+		box-sizing: border-box;
+		float: left;
+		font-size: 9vw;
+		outline: none;
+		transition: background-color 100ms;
+		font-family: 'MyriadProRegular', sans-serif;
+		&:active {
+			background-color: rgba(230, 238, 240, .65);
+		}
+		&:nth-child(10) {
+			border-bottom: none;
+		}
+		&:nth-child(11) {
+			border-bottom: none;
+		}
+		&:nth-child(12) {
+			border-bottom: none;
+		}
+	}
+	.backSpace {
+		background: url(../../../assets/img/domain/backspace.svg) center center no-repeat;
+		background-size: 25%;
+	}
+}
+
+@keyframes cursor {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

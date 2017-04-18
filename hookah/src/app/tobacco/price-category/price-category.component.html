@@ -1,0 +1,23 @@
+<section id="choicePriceCategory">
+    <header><div class="back" routerLink="/choice-taste"></div><span>Выбор табака</span></header>
+    <div class="wrapper">
+        <div class="taste">
+            <h2>Ценовая категория табака</h2>
+            <p>Выберите, какую ценовую категорию табака Вы предпочитаете?</p>
+            <button *ngFor="let category of categories"
+                    routerLink="/who-choice-bowl"
+                    (click)="choicePriceCategory(category.title)"
+                    class="btn">{{category.title + (category.price ? ' (' + category.price + ' ' + currency + ')' : '')}}</button>
+        </div>
+    </div>
+    <!--<script>-->
+        <!--var PriceCat = {-->
+            <!--hundlers: {-->
+                <!--".js-priceCategory:click"   : function() { PriceCat.choicePriceCategory($(this)); },-->
+            <!--},-->
+            <!--choicePriceCategory: function ($btn) {-->
+                <!--ORDER.priceCat = $btn.text();-->
+            <!--},-->
+        <!--}-->
+    <!--</script>-->
+</section>

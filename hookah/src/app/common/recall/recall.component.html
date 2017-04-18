@@ -1,0 +1,64 @@
+<section class="scrollSection" id="recall">
+    <header><div class="homeIcon" routerLink="/home" onclick=""></div><span>Отзывы</span></header>
+    <div class="wrapper">
+        <div class="recallBlock" *ngFor="let review of reviews">
+            <div class="head">
+                <i class="comAvatar"></i>
+                <div class="name">{{review.user_name}}</div>
+                <div class="date">{{review.date_added | date: "dd.mm.yy в hh:mm"}}</div>
+            </div>
+            <p>{{review.text}}</p>
+            <div class="evaluation">
+                <div class="stars disabled">
+                    <span *ngFor="let isActive of review.stars" [ngClass]="{active: isActive}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer onclick="">
+        <!--<form action="<?=Url::to(['/reviews'])?>" method="create">-->
+        <form>
+            <div class="evaluation">
+                <div class="stars">
+                    <input type="radio" name="star" value="1"><span></span>
+                    <input type="radio" name="star" value="2"><span></span>
+                    <input type="radio" name="star" value="3"><span></span>
+                    <input type="radio" name="star" value="4"><span></span>
+                    <input type="radio" name="star" value="5" checked><span class="active"></span>
+                </div>
+            </div>
+            <div class="controls">
+                <i class="text-icon"></i>
+                <textarea class="comment" placeholder="Ваше сообщение" name="review"></textarea>
+                <input success-submit-func="Recall.successRecall" type="submit" class="submit" value="">
+            </div>
+        </form>
+    </footer>
+    <!--<script>-->
+        <!--var Recall = {-->
+            <!--hundlers: {-->
+                <!--".stars&#45;&#45;not(.disabled) span:click" : function() {-->
+                    <!--$(this).closest('.stars').find('span').removeClass('active');-->
+                    <!--$(this).addClass('active').prev().prop('checked', true);-->
+                <!--}, // Управление оценкой(звезды)-->
+                <!--"#recall .comment:focus" : function() { -->
+                    <!--$(this).closest('.controls').addClass('open'); -->
+                    <!--$('#recall footer .evaluation').fadeIn(); -->
+                <!--},-->
+                <!--"#recall:click"          : function(e){ Recall.hideControls(e); },-->
+            <!--},-->
+            <!--hideControls: function (e) {-->
+                <!--var isFooter = $(e.target).closest('footer').length;-->
+                <!--if( !isFooter ) {-->
+                    <!--var footer = $('#recall footer');-->
+                    <!--footer.find('.controls').removeClass('open');-->
+                    <!--footer.find('.evaluation').fadeOut();-->
+                <!--}-->
+            <!--},-->
+            <!--successRecall: function () {-->
+                <!--$('.comment').val('');-->
+                <!--AppJS.showMessageSection('Спасибо за Ваш отзыв! Он будет опубликован после проверки модератором.');-->
+            <!--},-->
+        <!--}-->
+    <!--</script>-->
+</section>

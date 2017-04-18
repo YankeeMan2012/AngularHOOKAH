@@ -1,0 +1,12 @@
+<section id="choiceTable">
+    <p>Введите номер вашего столика</p>
+    <div class="pseudoInput">
+        <span>{{tableView}}</span>
+    </div>
+    <p class="error" *ngIf="!isValidTable">Необходимо ввести номер столика!</p>
+    <button type="button" class="btn" (click)="onChoiceClick()">Далее</button>
+    <div class="keyboard">
+        <button type="button" class="key" *ngFor="let key of keyboard"
+                [ngClass]="{backSpace:!key.add}" (click)="onKeyClick(key)">{{key.value}}</button>
+    </div>
+</section>

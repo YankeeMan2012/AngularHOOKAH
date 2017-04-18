@@ -1,0 +1,34 @@
+<section class="scrollSection" id="article">
+    <header><div class="homeIcon" routerLink="/home" onclick=""></div><span>Статьи о кальяне</span></header>
+    <div class="wrapper">
+
+        <!--<?php foreach($data['articles'] ?? [] as $article): ?>-->
+        <div class="articleBlock" *ngFor="let article of articles">
+            <div class="head">
+                <div class="name">{{article.title}}</div>
+                <!--<div class="date">{{article.create_time | date: "dd.mm.yy в hh:mm"}}</div>-->
+            </div>
+            <div class="poster">
+                <!--<img src="{{article.image}}" alt="poster">-->
+                <img src="http://lviv23.hookahme.loc/res/images/Hookah/articles/1.jpeg" alt="poster">
+            </div>
+            <!--<p class="text"><span>{{article.text}}<?= mb_ereg_replace('\n', '<br />', $article['text']); ?></span></p>-->
+            <p class="text" [ngClass]="{open: article.isOpen}"><span>{{article.text}}</span></p>
+            <div class="visibility" (click)="read(article)">Читать</div>
+        </div>
+        <!--<?php endforeach; ?>-->
+    </div>
+    <!--<script>-->
+        <!--var Article = {-->
+            <!--hundlers: {-->
+                <!--"#article .visibility:click" : function() { Article.readAll(this); },  // Читать статью-->
+            <!--},-->
+            <!--readAll: function (el) {-->
+                <!--var article = $(el).closest('.articleBlock');-->
+                <!--article.find('.text').toggleClass('open');-->
+                <!--if(article.find('.text').hasClass('open')) { $(el).text('Свернуть'); }-->
+                <!--else { $(el).text('Читать'); }-->
+            <!--},-->
+        <!--}-->
+    <!--</script>-->
+</section>

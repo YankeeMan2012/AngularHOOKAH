@@ -40,13 +40,11 @@ export class ChoiceTable implements OnInit {
     }
 
     private onChoiceClick(): void {
-        console.log(this.test);
-        console.log($);
         if (!this.tableView.length) {
             this.isValidTable = false;
         } else {
             this.tableNum = parseInt(this.tableView);
-            console.log(this.tableNum);
+            // console.log(this.tableNum);
             this.router.navigate(['/home']);
         }
     }

@@ -102,6 +102,15 @@ gulp.task('filterTobacco', function(){
         .pipe(gulp.dest('src/app/tobacco/filter-tobacco'));
 });
 
+gulp.task('tobaccoList', function(){
+    return gulp.src('src/scss/tobaccoList_&_Mix.scss')
+        .pipe(sass().on('error', notify.onError()))
+        .pipe(autoprefixer('last 4 versions'))
+        .pipe(minifyCss())
+        .pipe(rename('tobacco-list.component.css'))
+        .pipe(gulp.dest('src/app/tobacco/tobacco-list'));
+});
+
 
 
 
@@ -124,6 +133,7 @@ gulp.task('watcher', function(){
    gulp.watch('src/scss/choiceTaste.scss', ['choiceTaste']);
    gulp.watch('src/scss/priceCategory.scss', ['priceCategory']);
    gulp.watch('src/scss/filterTobacco.scss', ['filterTobacco']);
+   gulp.watch('src/scss/tobaccoList_&_Mix.scss', ['tobaccoList']);
 });
 
 gulp.task('default', [
@@ -137,6 +147,7 @@ gulp.task('default', [
     'choiceTaste',
     'priceCategory',
     'filterTobacco',
+    'tobaccoList',
 
 
     'libsJs'

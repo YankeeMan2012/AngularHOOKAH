@@ -30,4 +30,12 @@
     <div id="preloaderPercent">{{percent}}%</div>
 </section>
 
+<section id="infoMessage" *ngIf="showInfo">
+    <div class="closeBtn" (click)="showInfo = false"></div>
+    <div class="wrapper">
+        <div class="message">Уведомление!</div>
+        <div class="btn js-ok">Ок</div>
+    </div>
+</section>
+
 <router-outlet></router-outlet>

@@ -1,0 +1,49 @@
+#infoMessage {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background: #fafafa;
+	z-index: 100;
+	.closeBtn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 70px;
+		height: 70px;
+		background: url(/assets/img/domain/close.svg) center center / 15px no-repeat;
+	}
+	.wrapper {
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.message {
+		width: 80%;
+		text-align: center;
+		font: 5vw/6vw MyriadProLight,sans-serif;
+		color: #bd9d5e;
+	}
+	.btn {
+		display: none;
+		background: none;
+		width: 30%;
+		text-align: center;
+		margin-top: 5vw;
+		line-height: 6vh;
+	}
+	&.okBtn {
+		.wrapper {
+			flex-direction: column;
+		}
+		.btn {
+			display: block;
+		}
+		.closeBtn {
+			display: none;
+		}
+	}
+}

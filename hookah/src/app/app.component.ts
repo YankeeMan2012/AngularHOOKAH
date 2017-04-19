@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from './shared/http.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,10 @@ export class AppComponent implements OnInit {
     private isLoad: boolean = true; // false - Чтобы включить прелоадер
     private animate: boolean = false;
     private percent: number = 0;
+
+    private showInfo: boolean = true;
+
+    constructor(private httpService: HttpService, private router: Router) {}
 
     private animatePreloader() {
         var interval = setInterval(() => {
@@ -23,6 +29,13 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.router.navigate(['/']);
         this.animatePreloader();
+        this.httpService.getStaticAppData();
+    }
+
+    private showInfoMsg(params) {
+        console.log(111);
+        console.log(params);
     }
 }

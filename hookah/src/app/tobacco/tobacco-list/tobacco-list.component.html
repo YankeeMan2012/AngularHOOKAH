@@ -1,0 +1,126 @@
+<!--<?php-->
+
+<!--/** @var $data array */-->
+
+<!--$currency = Yii::$app->session->get('currency') ?? '';-->
+<!--$enableSellingByPriceCategory = Yii::$app->settings->fetch('enableSellingByPriceCategory') ?? 0;-->
+
+<!--?>-->
+
+<section class="scrollSection" id="tobaccoList">
+    <header>
+        <div *ngIf="!search"
+             class="viewMain">
+            <div class="back" routerLink="/filter-tobacco"></div>
+            <span>Выбор табака</span>
+            <div class="search"
+                 (click)="search = !search"></div>
+        </div>
+        <div *ngIf="search"
+             class="viewSearch">
+            <input (input)="searchListVal($event.target.value)"
+                   type="text"
+                   class="searchInput"
+                   autofocus>
+            <div class="closeBtn"
+                 (click)="search = !search; searchListVal('')"></div>
+        </div>
+    </header>
+    <ul class="tobaccoBox">
+        <li *ngFor="let tobacco of tobaccos"
+            [ngClass]="{selected: tobacco.selected, searchFiltration: tobacco.filtration}"
+            (click)="dropDown(dropdownBlock, tobacco)"
+            class="tobacco">
+            <p class="title">{{tobacco.br_name + ' ' + tobacco.model + ' ' + tobacco.fl_name}}</p>
+            <p class="add" (click)="selectTobacco($event, tobacco)"></p>
+            <div class="dropdownBlock"
+                 [ngClass]="{open: tobacco.open}"
+                 [ngStyle]="{height: tobacco.dropHeight + 'px'}"
+                 #dropdownBlock>
+                <p class="description">{{tobacco.description}}</p>
+                <span class="wrapper">
+                    <div class="priceCategory">
+                        <i *ngFor="let i of [1,2,3,4,5]"
+                           [ngClass]="{active: i <= priceCategories[tobacco.category_id].stars}"
+                           class="coin"></i>
+                    </div>
+                    <span *ngIf="!enableSellingByPriceCategory"
+                          class="priceForGram">{{ (tobacco.price / 100) | number: '1.2-2' }} грн. (за 1гр)</span>
+                </span>
+            </div>
+        </li>
+    </ul>
+    <footer href="/tobacco-ratio" onclick="">Далее</footer>
+    <!--<script>-->
+        <!--var tData = <?= json_encode($data['tobaccos'] ?? []) ?>;-->
+        <!--var tPriceCat = <?= json_encode($data['priceCategories'] ?? []) ?>;-->
+        <!--var TobaccoList = {-->
+            <!--hundlers: {-->
+                <!--"#tobaccoList li:click"      : function() { $(this).children('.dropdownBlock').slideToggle(300).closest('li').toggleClass('open'); }, // Описание табака-->
+                <!--"#tobaccoList li .add:click" : function(e){ TobaccoList.selectTobacco(this); e.stopPropagation(); }, //Выбор табаков-->
+                <!--'#searchTobacco:input'       : function() { AppJS.searchListVal(this, '.title span') }, // Поиск табак-->
+            <!--},-->
+            <!--ready: function () {-->
+                <!--for (var id in APP.tobacco) {-->
+                    <!--$('[tobacco-id="'+ id +'"]').addClass('selected');-->
+                <!--}-->
+                <!--if (Object.keys(APP.tobacco).length) $('footer').slideDown(300);-->
+
+                <!--var temp = {};-->
+                <!--for (var i = 0; i < tData.length; i++) {-->
+                    <!--temp[tData[i].tobacco_id] = tData[i];-->
+                <!--}-->
+                <!--tData = temp;-->
+            <!--},-->
+            <!--selectTobacco: function (el) {-->
+                <!--var li = $(el).closest('li');-->
+                <!--var footer = $('footer');-->
+                <!--if (li.siblings('.selected').length < 4 || li.hasClass('selected')) { // Выбранных табаков меньше 4 или мы кликаем по уже выбранному-->
+                    <!--var title = $(el).siblings('p.title');-->
+                    <!--var id = $(li).attr('tobacco-id');-->
+                    <!--if ( li.hasClass('selected') ) {-->
+                        <!--li.removeClass('selected');-->
+                        <!--TobaccoList.toAPP(id, true);-->
+                    <!--} else {-->
+                        <!--li.addClass('selected');-->
+                        <!--TobaccoList.toAPP(id);-->
+                    <!--}-->
+                <!--} else {-->
+                    <!--Notice.messageBox('N', 'Нельзя выбрать больше 4 табаков.');-->
+                <!--}-->
+                <!--if ($('.tobaccoBox li.selected').length > 0) {-->
+                    <!--footer.slideDown(300);-->
+                <!--} else {-->
+                    <!--footer.slideUp(300);-->
+                <!--}-->
+            <!--},-->
+            <!--toAPP: function (id, isRemove) {-->
+                <!--// Очистка выбраного микса и итоговой цены табака-->
+                <!--if (APP.tobaccoMix == '') {-->
+                    <!--APP.tobaccoMix = '';-->
+                    <!--APP.prices.tobacco = 0;-->
+                <!--}-->
+                <!--// Удаление или добавление информации о табаке-->
+                <!--if (isRemove)  {-->
+                    <!--delete APP.tobacco[id];-->
+                <!--} else {-->
+                    <!--APP.tobacco[id] = {-->
+                        <!--brand: tData[id].br_name,-->
+                        <!--model: tData[id].model,-->
+                        <!--taste: tData[id].fl_name,-->
+                        <!--price: +tPriceCat[tData[id].category_id].price-->
+                    <!--};-->
+                <!--}-->
+                <!--// Изменение итоговой цены табака (по ценовой категории)-->
+                <!--if (AppJS.enablePriceCat) {-->
+                    <!--var maxPrice = 0;-->
+                    <!--for (var key in APP.tobacco) {-->
+                        <!--var catPrice = APP.tobacco[key].price;-->
+                        <!--maxPrice = maxPrice < catPrice ? catPrice : maxPrice;-->
+                    <!--}-->
+                    <!--APP.prices.tobacco = maxPrice;-->
+                <!--}-->
+            <!--},-->
+        <!--}-->
+    <!--</script>-->
+</section>

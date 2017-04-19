@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { HttpService } from '../../shared/http.service'
+// import { HttpService } from '../../shared/http.service'
+import { Storage } from '../../shared/storage.service'
 
 declare const Swiper: any;
 declare const $: any;
@@ -17,7 +18,7 @@ interface IHome {
     selector: 'home',
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.css'],
-    providers: [HttpService]
+    // providers: [HttpService]
 })
 export class Home implements OnInit {
     
@@ -58,7 +59,8 @@ export class Home implements OnInit {
         }
     };
 
-    constructor(private router: Router, private httpService: HttpService) {}
+    // constructor(private router: Router, private httpService: HttpService) {}
+    constructor(private router: Router, private storage: Storage) {}
 
     private sliderInit(): void {
         new Swiper('.main-swiper', {
@@ -74,14 +76,19 @@ export class Home implements OnInit {
     }
 
     ngOnInit() {
-        this.httpService.getData('http://lviv23.hookah.loc/home?get-data-as=json').subscribe(
-            data => {
-                this.home = data;
-                setTimeout(() => {
-                    this.sliderInit();
-                }, 0);
-            }
-        );
+        this.home = this.storage.getData('home');
+        setTimeout(() => {
+            this.sliderInit();
+        }, 0);
+
+        // this.httpService.getData('http://lviv23.hookah.loc/home?get-data-as=json').subscribe(
+        //     data => {
+        //         this.home = data;
+        //         setTimeout(() => {
+        //             this.sliderInit();
+        //         }, 0);
+        //     }
+        // );
     }
 
 }

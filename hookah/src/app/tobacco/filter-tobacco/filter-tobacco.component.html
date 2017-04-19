@@ -19,8 +19,9 @@
                 #brandList>
                 <!--<?php foreach( $data['brands'] as $keyBrand => $brand): ?>-->
                 <li *ngFor="let brand of filters.brands"
-                    class="filterItem"
-                    brand-id="<?=$keyBrand; ?>">{{brand.title}}</li>
+                    [ngClass]="{selected: brand.selected}"
+                    (click)="addFilter($event, brand, 'brand')"
+                    class="filterItem">{{brand.title}}</li>
                 <!--<?php endforeach;?>-->
             </ul>
         </li>
@@ -37,6 +38,8 @@
                 <!--<?php foreach( $data['flavours'] as $keyFlavour => $flavour): ?>-->
                 <!--<?php if(!empty($flavour)): ?>-->
                 <li *ngFor="let taste of filters.flavours"
+                    [ngClass]="{selected: taste.selected}"
+                    (click)="addFilter($event, taste, 'taste')"
                     class="filterItem">{{taste.title}}</li>
                 <!--<?php endif;?>-->
                 <!--<?php endforeach;?>-->
@@ -44,30 +47,52 @@
         </li>
         <!--<?php endif; ?>-->
         <!--<?php if(!empty($data['priceCategories']) && sizeof($data['priceCategories']) > 1): ?>-->
-        <li *ngIf="isSetPrice" class="price">
+        <li *ngIf="filters.priceCategories.length"
+            (click)="categoryHeight = categoryHeight ? 0 : categoryList.scrollHeight; isOpenPrice = !isOpenPrice;"
+            class="price">
             <span>Цена</span>
-            <div class="downArrow"></div>
-            <ul>
+            <div [ngClass]="{rotate: isOpenPrice}" class="downArrow"></div>
+            <ul [ngClass]="{slideDown: isOpenPrice}"
+                [ngStyle]="{height: categoryHeight + 'px'}"
+                #categoryList>
+                <ng-template [ngIf]="enablePriceCat">
+                    <li *ngFor="let category of filters.priceCategories"
+                        [ngClass]="{selected: category.selected}"
+                        (click)="addFilter($event, category, 'priceCat')"
+                        class="filterItem">{{category.title + ', ' + category.price + ' грн.'}}</li>
+                </ng-template>
+                <ng-template [ngIf]="!enablePriceCat">
+                    <li *ngFor="let category of filters.priceCategories"
+                        [ngClass]="{selected: category.selected}"
+                        (click)="addFilter($event, category, 'priceCat')"
+                        class="filterItem">{{category.title}}</li>
+                </ng-template>
+                <!--<ng-template *ngIf="!enablePriceCat">-->
+                    <!--<li  *ngFor="let category of filters.priceCategories"-->
+                         <!--class="filterItem">{{category.title}}</li>-->
+                <!--</ng-template>-->
                 <!--<?php foreach($data['priceCategories'] as $keyCategory => $category): ?>-->
                 <!--<?php if(!empty($category['category'])): ?>-->
                 <!--<?php if($enablePriceCat): ?>-->
-                <li class="filterItem" category-id="<?=$keyCategory; ?>"><?= Yii::$app->lng->word($category['category']).', '. ceil($category['price']) . ' грн.' ?></li>
+                <!--<li class="filterItem" category-id="<?=$keyCategory; ?>"><?= Yii::$app->lng->word($category['category']).', '. ceil($category['price']) . ' грн.' ?></li>-->
                 <!--<?php else:?>-->
-                <li class="filterItem" category-id="<?=$keyCategory; ?>"><?= Yii::$app->lng->word($category['category']) ?></li>
+                <!--<li class="filterItem" category-id="<?=$keyCategory; ?>"><?= Yii::$app->lng->word($category['category']) ?></li>-->
                 <!--<?php endif;?>-->
                 <!--<?php endif;?>-->
                 <!--<?php endforeach;?>-->
             </ul>
         </li>
         <!--<?php endif; ?>-->
-        <li class="popular getTobacco">
+        <li *ngIf="filters.popularTobaccos.length"
+            (click)="showTobaccoList('POPULAR')"
+            class="popular">
             <span>Популярное</span>
             <div class="rightArrow"></div>
         </li>
     </ul>
     <!--<?php if(isset($data['tobaccos'])): ?>-->
-    <footer *ngIf="isSetTobacco"
-            class="filterTobaccoResult getTobacco">Показать <span>{{filters.tobaccos.length}}</span> табаков</footer>
+    <footer *ngIf="filters.tobaccos.length"
+            (click)="showTobaccoList()">{{showTobacco.length ? 'Показать ' + showTobacco.length + ' табаков' : 'К сожалению, таких табаков нет'}}</footer>
     <!--<?php endif; ?>-->
     <!--<script>-->
         <!--var tList = <?= json_encode($data['tobaccos'] ?? []) ?>;-->

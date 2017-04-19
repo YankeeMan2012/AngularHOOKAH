@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
+import { HttpService } from './shared/http.service';
+import { Storage } from './shared/storage.service';
+
 import { AppComponent } from './app.component';
 import { ChoiceTable } from './common/choice-table/choice-table.component';
 import { Home } from './common/home/home.component';
@@ -13,10 +16,9 @@ import { Recall } from "./common/recall/recall.component";
 import { Article } from "./common/article/article.component";
 import { WhoChoiceTobacco } from "./tobacco/who-choice-tobacco/who-choice-tobacco.component";
 import { ChoiceTaste } from './tobacco/choice-taste/choice-taste.component';
-
-import { HttpService } from './shared/http.service';
 import { PriceCategory } from './tobacco/price-category/price-category.component';
 import { FilterTobacco } from './tobacco/filter-tobacco/filter-tobacco.component';
+import { TobaccoList } from './tobacco/tobacco-list/tobacco-list.component';
 import { WhoChoiceBowl } from './bowl/who-choice-bowl/who-choice-bowl.component';
 
 const appRoutes: Routes = [
@@ -29,6 +31,7 @@ const appRoutes: Routes = [
     { path: 'choice-taste', component: ChoiceTaste },
     { path: 'price-category', component: PriceCategory },
     { path: 'filter-tobacco', component: FilterTobacco },
+    { path: 'tobacco-list', component: TobaccoList },
     { path: 'who-choice-bowl', component: WhoChoiceBowl },
     { path: '**', component: NotFound }
 ];
@@ -46,7 +49,8 @@ const appRoutes: Routes = [
     ChoiceTaste,
     PriceCategory,
     WhoChoiceBowl,
-    FilterTobacco
+    FilterTobacco,
+    TobaccoList
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [HttpService],
+  providers: [HttpService, Storage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,73 @@
+#tobaccoList, #tobaccoMix{
+	ul{
+		padding-bottom: 10vh;
+		li{
+			border-bottom: 1px solid #eaeaea; padding: 5vw 7vw; font-size: 5vw; line-height: 1.2;
+			position: relative; display: block;
+			&.notPopular, &.filtration, &.searchFiltration {display: none;}
+			p.title{width: 75%; display: inline-block;margin: 2vw 0;}
+			p.add{
+				width: 22%; display: inline-block;height: 5vh; position: absolute; right: 0;
+				top: 4vh; z-index: 10;
+			}
+			.dropdownBlock span{
+				font-size: 4vw; color: #7b7b7b;
+				font-family: 'MyriadProLight', sans-serif;
+				&.caption{font-family: 'MyriadProSemibold', sans-serif; text-transform: uppercase; }
+			}
+			.dropdownBlock{
+				transition: all .2s linear;
+				//display: none;
+				height: 0;
+				overflow: hidden;
+				padding-bottom: 3px;
+				p.description{ padding-top: .4vh; font-size: 2.3vh; line-height: 1.2; width: 90%; color: #7b7b7b; }
+				.wrapper{
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+				}
+				.priceForGram {
+					color: #bd9d5e;
+					font: 4vw/4vw MyriadProRegular, sans-serif;
+				}
+				.priceCategory{
+					margin-top: 2vh;
+					i{
+						margin-right: .8vh;display: inline-block; font-size: 0;width: 3vh;height: 3vh;
+						background: url(../../../assets/img/domain/coin.svg) center center no-repeat; background-size: 100%;
+					}
+					i.active{ background: url(../../../assets/img/domain/coin-active.svg) center center no-repeat; background-size: 100%;}
+				}
+
+			}
+			&:before, &:after{
+				content: ''; display: block; position: absolute;
+				background-color: #252525; top: 4vh; transition: all 200ms; right: 35px;
+			}
+			&:before{width: 2px; height: 20px; margin-top: 1px;}
+			&:after{ width: 20px;height: 2px;  margin-right: -9px; margin-top: 10px;}
+			&.selected{
+				&:before, &:after{ background-color: #bd9d5e;transform: rotate(0deg);}
+				&:after{ width: 12px; transform: translate(-12px,2px) rotate(47deg);}
+				&:before{transform: translateX(3px) rotate(45deg); }
+			}
+		}
+	}
+	footer { display: none; }
+}
+
+
+@media screen and (min-width: 700px){
+	#tobaccoList, #tobaccoMix {
+		ul{
+			li{
+				&:before, &:after{
+					top: 6.4vh!important;
+					right: 60px!important;
+					transform: scale(1.3);
+				}
+			}
+		}
+	}
+}

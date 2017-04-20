@@ -9,7 +9,7 @@ interface ICategories {
 @Component({
   selector: 'price-category',
   templateUrl: './price-category.component.html',
-  styleUrls: ['./price-category.component.css']
+  styleUrls: ['./price-category.component.scss']
 })
 export class PriceCategory implements OnInit {
 

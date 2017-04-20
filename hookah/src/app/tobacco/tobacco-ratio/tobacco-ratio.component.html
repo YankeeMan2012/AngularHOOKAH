@@ -1,0 +1,37 @@
+<section id="tobaccoRatio">
+    <header><div class="back" routerLink="/tobacco-list"></div><span>Соотношение табаков</span></header>
+    <div class="rangeBox">
+        <div class="choice">
+            <div *ngFor="let tobacco of tobaccos"
+                 [ngStyle]="{'height': tobacco.percent + '%', 'bottom': tobacco.bottom + '%'}"
+                 class="tobacco">
+                <p *ngIf="!tobacco.showPercent"
+                   class="name">
+                    <span *ngIf="tobacco.percent > 5"
+                          class="brand">{{tobacco.model}} </span>
+                    <span class="model">{{tobacco.taste}}</span>
+                </p>
+                <p *ngIf="tobacco.showPercent"
+                   class="percentValue">{{tobacco.percent}}%</p>
+            </div>
+        </div>
+        <div class="range"></div>
+        <img src="/assets/img/domain/bowl_ratio.png">
+    </div>
+    <div class="method">
+        <p>Способ забивки<p>
+        <div *ngFor="let method of methods"
+             class="{{method.method}}"
+             [ngClass]="{selected: method.selected}"
+             (click)="methodClick(method)">{{method.title}}</div>
+    </div>
+    <div class="strength">
+        <p>Крепость</p>
+        <ul *ngIf="strengths.length" class="strengthSlider">
+            <li *ngFor="let strength of strengths"
+                [ngClass]="{selected: strength.selected}"
+                (click)="strengthClick(strength)">{{strength.name}}</li>
+        </ul>
+    </div>
+    <footer routerLink="/who-choice-bowl">Далее</footer>
+</section>

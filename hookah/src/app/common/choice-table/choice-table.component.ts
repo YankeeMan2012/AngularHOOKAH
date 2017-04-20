@@ -10,7 +10,7 @@ declare const $: any;
 @Component({
     selector: 'choice-table',
     templateUrl: 'choice-table.component.html',
-    styleUrls: ['choice-table.component.css'],
+    styleUrls: ['choice-table.component.scss'],
     providers: [HttpService]
 })
 export class ChoiceTable implements OnInit {

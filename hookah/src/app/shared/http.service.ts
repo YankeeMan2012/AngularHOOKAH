@@ -46,6 +46,12 @@ export class HttpService {
             }
         );
 
+        this.getData('http://lviv23.hookah.loc/tobacco-ratio?get-data-as=json').subscribe(
+            data => {
+                this.storage.setData('tobaccoRatio', data.strengths);
+            }
+        );
+
 
     }
 

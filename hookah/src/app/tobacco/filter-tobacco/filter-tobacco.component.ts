@@ -5,7 +5,7 @@ import { Storage } from '../../shared/storage.service'
 @Component({
   selector: 'filter-tobacco',
   templateUrl: './filter-tobacco.component.html',
-  styleUrls: ['./filter-tobacco.component.css']
+  styleUrls: ['./filter-tobacco.component.scss']
 })
 export class FilterTobacco implements OnInit {
 
@@ -55,7 +55,7 @@ export class FilterTobacco implements OnInit {
 
     private addFilter(e, filter, type): void {
         e.stopPropagation();
-        // APP.tobacco = {};  // Если изменилось состояние фильтра очищаем выбранные табаки
+        this.storage.setAppData('tobaccoListSection', null); // Если изменилось состояние фильтра очищаем выбранные табаки
 
         filter.selected = !filter.selected;
         filter.selected ? this.show[type][filter.id] = filter.id : delete this.show[type][filter.id];
@@ -72,7 +72,7 @@ export class FilterTobacco implements OnInit {
         }
     }
 
-    private showTobaccoList(flag): void {
+    private goToTobaccoList(flag): void {
         let save = {filters: this.filters, show: this.show, showTobacco: this.showTobacco};
         save['popular'] = flag === 'POPULAR';
         this.storage.setAppData('filterSection', save);
@@ -81,7 +81,5 @@ export class FilterTobacco implements OnInit {
             this.router.navigate(['/tobacco-list']);
         }
     }
-
-
 
 }

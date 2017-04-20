@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './shared/http.service'
 import { Router } from '@angular/router'
+import { Handler } from './shared/handler.service'
+
+interface IMessage {
+    title: string;
+    show: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -13,12 +19,26 @@ export class AppComponent implements OnInit {
     private animate: boolean = false;
     private percent: number = 0;
 
-    private showInfo: boolean = true;
+    private message: IMessage = {
+        title: '',
+        show: false
+    };
 
-    constructor(private httpService: HttpService, private router: Router) {}
+    constructor(private httpService: HttpService, private router: Router, private handler: Handler) {
+        handler.onMessage.subscribe(
+            msg => {
+                this.showMsg(msg);
+            }
+        )
+    }
 
-    private animatePreloader() {
-        var interval = setInterval(() => {
+    private showMsg(msg): void {
+        this.message.title = msg;
+        this.message.show = true;
+    }
+
+    private animatePreloader(): void {
+        let interval = setInterval(() => {
             this.animate = true;
             this.percent++;
             if(this.percent >= 100) {
@@ -32,10 +52,5 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/']);
         this.animatePreloader();
         this.httpService.getStaticAppData();
-    }
-
-    private showInfoMsg(params) {
-        console.log(111);
-        console.log(params);
     }
 }

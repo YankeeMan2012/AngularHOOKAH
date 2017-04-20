@@ -10,7 +10,7 @@ interface ITaste {
 @Component({
   selector: 'choice-taste',
   templateUrl: 'choice-taste.component.html',
-  styleUrls: ['choice-taste.component.css']
+  styleUrls: ['choice-taste.component.scss']
 })
 export class ChoiceTaste implements OnInit {
     

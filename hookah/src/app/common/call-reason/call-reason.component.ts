@@ -26,7 +26,7 @@ const reasons: ICall[] = [
 @Component({
     selector: 'call-reason',
     templateUrl: 'call-reason.component.html',
-    styleUrls: ['call-reason.component.css'],
+    styleUrls: ['call-reason.component.scss'],
     providers: [HttpService]
 })
 export class CallReason {

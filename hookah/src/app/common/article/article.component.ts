@@ -16,7 +16,7 @@ interface IArticles {
 @Component({
     selector: 'article',
     templateUrl: 'article.component.html',
-    styleUrls: ['article.component.css'],
+    styleUrls: ['article.component.scss'],
     providers: [HttpService]
 })
 export class Article implements OnInit {

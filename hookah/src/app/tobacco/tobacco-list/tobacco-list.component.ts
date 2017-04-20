@@ -1,29 +1,34 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router'
+import { Component, OnInit } from '@angular/core';
 import { Storage } from '../../shared/storage.service'
+import { Handler } from '../../shared/handler.service'
 
 @Component({
   selector: 'tobacco-list',
   templateUrl: './tobacco-list.component.html',
-  styleUrls: ['./tobacco-list.component.css']
+  styleUrls: ['./tobacco-list.component.scss']
 })
 export class TobaccoList implements OnInit {
-
-    // @Output() onInfoMsg = new EventEmitter<any>()
 
     private tobaccos: any = [];
     private priceCategories: any;
     private isPopular: boolean;
     private search: boolean = false;
     private selectedCounter: number = 0;
-
     private enableSellingByPriceCategory: boolean = false;  // потянуть с базы
 
-    constructor(private storage: Storage, private router: Router) {}
+    constructor(private storage: Storage, private handler: Handler) {}
 
     ngOnInit() {
-        let data = this.storage.getAppData('filterSection');
         this.priceCategories = this.storage.getData('priceCategory');
+        let oldState = this.storage.getAppData('tobaccoListSection');
+        if (oldState) {
+            this.tobaccos = oldState.tobaccos;
+            this.isPopular = oldState.isPopular;
+            this.selectedCounter = oldState.selectedCounter;
+            return;
+        }
+
+        let data = this.storage.getAppData('filterSection');
         this.isPopular = data.popular;
         if (data.popular) {
             data.filters.tobaccos.forEach((item) => {
@@ -48,9 +53,9 @@ export class TobaccoList implements OnInit {
         if (this.selectedCounter < 4 || tobacco.selected) {
             tobacco.selected = !tobacco.selected;
             tobacco.selected ? this.selectedCounter++ : this.selectedCounter--;
+            this.saveToAPP();
         } else {
-            console.log('notify');
-            // this.onInfoMsg.emit('notify');
+            this.handler.showMessage('Нельзя выбрать больше 4 табаков.');
         }
     }
 
@@ -67,6 +72,11 @@ export class TobaccoList implements OnInit {
             if ( fullName.indexOf(value) === -1 && exist ) exist = false;
             item.filtration = !exist;
         });
+    }
+
+    private saveToAPP(): void {
+        let save = {tobaccos: this.tobaccos, isPopular: this.isPopular, selectedCounter: this.selectedCounter};
+        this.storage.setAppData('tobaccoListSection', save);
     }
 
 }

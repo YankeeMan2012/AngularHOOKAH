@@ -17,7 +17,7 @@ interface IHome {
 @Component({
     selector: 'home',
     templateUrl: 'home.component.html',
-    styleUrls: ['home.component.css'],
+    styleUrls: ['home.component.scss'],
     // providers: [HttpService]
 })
 export class Home implements OnInit {

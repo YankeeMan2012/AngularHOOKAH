@@ -17,7 +17,7 @@ interface IReview {
 @Component({
     selector: 'recall',
     templateUrl: 'recall.component.html',
-    styleUrls: ['recall.component.css'],
+    styleUrls: ['recall.component.scss'],
     providers: [HttpService]
 })
 export class Recall implements OnInit {

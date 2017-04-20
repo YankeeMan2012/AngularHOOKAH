@@ -50,7 +50,7 @@
             </div>
         </li>
     </ul>
-    <footer href="/tobacco-ratio" onclick="">Далее</footer>
+    <footer [ngClass]="{footerUp: selectedCounter > 0}" routerLink="/tobacco-ratio">Далее</footer>
     <!--<script>-->
         <!--var tData = <?= json_encode($data['tobaccos'] ?? []) ?>;-->
         <!--var tPriceCat = <?= json_encode($data['priceCategories'] ?? []) ?>;-->

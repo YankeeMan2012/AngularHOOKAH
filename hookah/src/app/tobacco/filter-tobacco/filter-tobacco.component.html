@@ -84,7 +84,7 @@
         </li>
         <!--<?php endif; ?>-->
         <li *ngIf="filters.popularTobaccos.length"
-            (click)="showTobaccoList('POPULAR')"
+            (click)="goToTobaccoList('POPULAR')"
             class="popular">
             <span>Популярное</span>
             <div class="rightArrow"></div>
@@ -92,7 +92,7 @@
     </ul>
     <!--<?php if(isset($data['tobaccos'])): ?>-->
     <footer *ngIf="filters.tobaccos.length"
-            (click)="showTobaccoList()">{{showTobacco.length ? 'Показать ' + showTobacco.length + ' табаков' : 'К сожалению, таких табаков нет'}}</footer>
+            (click)="goToTobaccoList()">{{showTobacco.length ? 'Показать ' + showTobacco.length + ' табаков' : 'К сожалению, таких табаков нет'}}</footer>
     <!--<?php endif; ?>-->
     <!--<script>-->
         <!--var tList = <?= json_encode($data['tobaccos'] ?? []) ?>;-->

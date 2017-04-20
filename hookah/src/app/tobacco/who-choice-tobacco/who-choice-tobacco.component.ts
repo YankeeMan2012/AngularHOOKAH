@@ -8,7 +8,6 @@ import { Storage } from '../../shared/storage.service'
 @Component({
     selector: 'who-choice-tobacco',
     templateUrl: 'who-choice-tobacco.component.html',
-    styleUrls: ['who-choice-tobacco.component.css'],
     // providers: [HttpService]
 })
 export class WhoChoiceTobacco implements OnInit {

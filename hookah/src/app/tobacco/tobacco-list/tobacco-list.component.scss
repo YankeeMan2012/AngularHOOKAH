@@ -54,7 +54,15 @@
 			}
 		}
 	}
-	footer { display: none; }
+	footer {
+		transition: all .2s linear;
+		transform: translateY(100%);
+		opacity: 0;
+		&.footerUp {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
 }
 
 

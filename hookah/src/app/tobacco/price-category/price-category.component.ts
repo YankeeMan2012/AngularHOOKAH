@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../shared/http.service'
+import { Storage } from '../../shared/storage.service'
 
 interface ICategories {
     title: string,
@@ -16,38 +17,34 @@ export class PriceCategory implements OnInit {
     private currency: string = 'ГРН';
     private categories: ICategories[]= [];
 
-    constructor(private httpService: HttpService) {}
-
-    private choicePriceCategory(title): void {
-        console.log(title);
-    }
+    constructor(private httpService: HttpService, private storage: Storage) {}
 
     ngOnInit() {
-        this.httpService.getData('http://lviv23.hookah.loc/price-category?get-data-as=json').subscribe(
-            data => {
-                let isSet = false;
-                for (let key in data.priceCategories) {
-                    this.categories.push({title: data.priceCategories[key].category, price: data.priceCategories[key].price});
-                    isSet = true;
-                }
-                if (!isSet) {
-                    this.categories = [
-                        {
-                            title: 'Недорогой',
-                            price: ''
-                        },
-                        {
-                            title: 'Стандарт',
-                            price: ''
-                        },
-                        {
-                            title: 'Премиум',
-                            price: ''
-                        }
-                    ];
-                }
+        let categories = this.storage.getData('priceCategory');
+        if (categories) {
+            for (let key in categories) {
+                this.categories.push({title: categories[key].category, price: categories[key].price});
             }
-        );
+        } else {
+            this.categories = [
+                {
+                    title: 'Недорогой',
+                    price: ''
+                },
+                {
+                    title: 'Стандарт',
+                    price: ''
+                },
+                {
+                    title: 'Премиум',
+                    price: ''
+                }
+            ];
+        }
+    }
+
+    private goBack() {
+        history.back();
     }
 
 }

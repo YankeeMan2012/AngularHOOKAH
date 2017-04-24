@@ -1,7 +1,9 @@
 <section id="whoChoiceBowl" class="whoChoice">
-    <header><div class="back" (click)="back()"></div><span>Кто выберет чашу?</span></header>
+    <header>
+        <div class="back" (click)="goBack()"></div>
+        <span>Кто выберет чашу?</span></header>
     <ul>
-        <li routerLink="/who-choice-bowl-lid" class="tapEffect hkDiscretionBowl" data-clearStorage="bowl">
+        <li routerLink="/who-choice-bowl-lid" class="tapEffect">
             <h2>На усмотрение кальянщика</h2>
             <p>Наш кальянщик сам выбирает чашу</p>
         </li>

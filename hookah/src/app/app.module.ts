@@ -21,7 +21,15 @@ import {PriceCategory} from './tobacco/price-category/price-category.component';
 import {FilterTobacco} from './tobacco/filter-tobacco/filter-tobacco.component';
 import {TobaccoList} from './tobacco/tobacco-list/tobacco-list.component';
 import {TobaccoRatio} from './tobacco/tobacco-ratio/tobacco-ratio.component';
+import {TobaccoMixes} from './tobacco/tobacco-mixes/tobacco-mixes.component';
 import {WhoChoiceBowl} from './bowl/who-choice-bowl/who-choice-bowl.component';
+import {ChoiceBowl} from './bowl/choice-bowl/choice-bowl.component';
+import {WhoChoiceBowlLid} from './bowl-lid/who-choice-bowl-lid/who-choice-bowl-lid.component';
+import {ChoiceBowlLid} from './bowl-lid/choice-bowl-lid/choice-bowl-lid.component';
+import {WhoChoiceHookah} from './hookah/who-choice-hookah/who-choice-hookah.component';
+import {ChoiceHookah} from './hookah/choice-hookah/choice-hookah.component';
+import {WhoChoiceFiller} from './filler/who-choice-filler/who-choice-filler.component';
+import {ChoiceFiller} from './filler/choice-filler/choice-filler.component';
 
 const appRoutes: Routes = [
     {path: '', component: ChoiceTable},
@@ -35,7 +43,15 @@ const appRoutes: Routes = [
     {path: 'filter-tobacco', component: FilterTobacco},
     {path: 'tobacco-list', component: TobaccoList},
     {path: 'tobacco-ratio', component: TobaccoRatio},
+    {path: 'tobacco-mixes', component: TobaccoMixes},
     {path: 'who-choice-bowl', component: WhoChoiceBowl},
+    {path: 'choice-bowl', component: ChoiceBowl},
+    {path: 'who-choice-bowl-lid', component: WhoChoiceBowlLid},
+    {path: 'choice-bowl-lid', component: ChoiceBowlLid},
+    {path: 'who-choice-hookah', component: WhoChoiceHookah},
+    {path: 'choice-hookah', component: ChoiceHookah},
+    {path: 'who-choice-filler', component: WhoChoiceFiller},
+    {path: 'choice-filler', component: ChoiceFiller},
     {path: '**', component: NotFound}
 ];
 
@@ -54,7 +70,15 @@ const appRoutes: Routes = [
         WhoChoiceBowl,
         FilterTobacco,
         TobaccoList,
-        TobaccoRatio
+        TobaccoRatio,
+        ChoiceBowl,
+        TobaccoMixes,
+        WhoChoiceBowlLid,
+        ChoiceBowlLid,
+        WhoChoiceHookah,
+        ChoiceHookah,
+        WhoChoiceFiller,
+        ChoiceFiller
     ],
     imports: [
         BrowserModule,

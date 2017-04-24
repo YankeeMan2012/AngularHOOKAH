@@ -11,7 +11,6 @@ declare const $: any;
     selector: 'choice-table',
     templateUrl: 'choice-table.component.html',
     styleUrls: ['choice-table.component.scss'],
-    providers: [HttpService]
 })
 export class ChoiceTable implements OnInit {
     test: any;

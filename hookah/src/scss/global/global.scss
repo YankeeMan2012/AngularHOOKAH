@@ -1,10 +1,13 @@
 @import "../../../node_modules/swiper/dist/css/swiper.min";
 
+@import "libs/glide.core.min";
+@import "libs/glide.theme";
+
 @import "partials/fonts";
 @import "partials/main";
 @import "partials/headerAndFooter";
 @import "partials/preloader";
-@import "partials/choiseSection";
+@import "partials/choiceSection";
 @import "partials/whoChoice";
 @import "partials/infoMessage";
 @import "partials/tobaccoRatio";

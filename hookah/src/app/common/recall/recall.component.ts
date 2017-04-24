@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
 
-import { HttpService } from '../../shared/http.service'
+import { Storage } from '../../shared/storage.service'
 
 interface IReview {
     date_added: string;
@@ -11,33 +10,54 @@ interface IReview {
     status: string;
     text: string;
     user_name: string;
-    stars: boolean[];
+}
+
+interface IStar {
+    active: boolean;
+    value: number;
 }
 
 @Component({
     selector: 'recall',
     templateUrl: 'recall.component.html',
     styleUrls: ['recall.component.scss'],
-    providers: [HttpService]
 })
 export class Recall implements OnInit {
 
     private reviews: IReview[] = [];
+    private rating: IStar[] = [
+        {
+            active: false,
+            value: 1
+        },
+        {
+            active: false,
+            value: 2
+        },
+        {
+            active: false,
+            value: 3
+        },
+        {
+            active: false,
+            value: 4
+        },
+        {
+            active: true,
+            value: 5
+        },
+    ];
     
-    constructor(private router: Router, private httpService: HttpService) {}
+    constructor(private storage: Storage) {}
 
     ngOnInit() {
-        this.httpService.getData('http://lviv23.hookah.loc/recall?get-data-as=json').subscribe(
-            data => {
-                this.reviews = data.reviews;
-                for (let key in data.reviews) {
-                    this.reviews[key].stars = [];
-                    let rating = parseInt(data.reviews[key].rating);
-                    for (let i = 1; i < 6; i++) {
-                        this.reviews[key].stars.push(i <= rating);
-                    }
-                }
-            }
-        );
+        this.reviews = this.storage.getData('recall');
+    }
+
+    buildRating(star): void {
+        this.rating.forEach((item) => {
+            item.active = false;
+        });
+        star.active = true;
     }
 }

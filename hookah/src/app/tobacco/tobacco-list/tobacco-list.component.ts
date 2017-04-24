@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Storage } from '../../shared/storage.service'
 import { Handler } from '../../shared/handler.service'
 
@@ -7,7 +7,7 @@ import { Handler } from '../../shared/handler.service'
   templateUrl: './tobacco-list.component.html',
   styleUrls: ['./tobacco-list.component.scss']
 })
-export class TobaccoList implements OnInit {
+export class TobaccoList implements OnInit, OnDestroy {
 
     private tobaccos: any = [];
     private priceCategories: any;
@@ -48,12 +48,16 @@ export class TobaccoList implements OnInit {
         });
     }
 
+    ngOnDestroy() {
+        let save = {tobaccos: this.tobaccos, isPopular: this.isPopular, selectedCounter: this.selectedCounter};
+        this.storage.setAppData('tobaccoListSection', save);
+    }
+
     private selectTobacco(e, tobacco): void {
         e.stopPropagation();
         if (this.selectedCounter < 4 || tobacco.selected) {
             tobacco.selected = !tobacco.selected;
             tobacco.selected ? this.selectedCounter++ : this.selectedCounter--;
-            this.saveToAPP();
         } else {
             this.handler.showMessage('Нельзя выбрать больше 4 табаков.');
         }
@@ -68,15 +72,13 @@ export class TobaccoList implements OnInit {
         let value = val.toLowerCase();
         this.tobaccos.forEach((item) => {
             let exist = true;
-            let fullName = (item.br_name + ' ' + item.model + ' ' + item.fl_name).toLowerCase();
+            let fullName = (item.br_name + ' ' + item.model + ' ' + item.fl_name + ' ' + item.tags).toLowerCase();
             if ( fullName.indexOf(value) === -1 && exist ) exist = false;
             item.filtration = !exist;
         });
     }
 
-    private saveToAPP(): void {
-        let save = {tobaccos: this.tobaccos, isPopular: this.isPopular, selectedCounter: this.selectedCounter};
-        this.storage.setAppData('tobaccoListSection', save);
+    private goBack() {
+        history.back();
     }
-
 }

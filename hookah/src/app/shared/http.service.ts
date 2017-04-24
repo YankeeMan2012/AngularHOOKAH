@@ -20,11 +20,17 @@ export class HttpService {
             });
     }
 
-    public getStaticAppData() {
+    public getStaticAppData(): void {
 
         this.getData('http://lviv23.hookah.loc/home?get-data-as=json').subscribe(
             data => {
                 this.storage.setData('home', data);
+            }
+        );
+
+        this.getData('http://lviv23.hookah.loc/recall?get-data-as=json').subscribe(
+            data => {
+                this.storage.setData('recall', data.reviews);
             }
         );
 
@@ -52,6 +58,17 @@ export class HttpService {
             }
         );
 
+        this.getData('http://lviv23.hookah.loc/choice-bowl?get-data-as=json').subscribe(
+            data => {
+                this.storage.setData('bowls', data.bowls);
+            }
+        );
+
+        this.getData('http://lviv23.hookah.loc/choice-filler?get-data-as=json').subscribe(
+            data => {
+                this.storage.setData('fillers', data.fillers);
+            }
+        );
 
     }
 

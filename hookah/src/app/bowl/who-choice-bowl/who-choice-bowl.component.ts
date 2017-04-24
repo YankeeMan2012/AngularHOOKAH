@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './who-choice-bowl.component.html',
 })
 export class WhoChoiceBowl {
-    private back(): void {
+    private goBack(): void {
         history.back();
     }
 }

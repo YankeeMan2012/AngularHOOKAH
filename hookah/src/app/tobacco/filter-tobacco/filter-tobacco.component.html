@@ -6,7 +6,7 @@
 <!--?>-->
 
 <section class="scrollSection" id="filterTobacco">
-    <header><div class="back"></div><span>Фильтрация табаков</span></header>
+    <header><div class="back" (click)="goBack()"></div><span>Фильтрация табаков</span></header>
     <ul class="filter">
         <!--<?php if(!empty($data['brands']) && sizeof($data['brands']) > 1): ?>-->
         <li *ngIf="filters.brands.length"

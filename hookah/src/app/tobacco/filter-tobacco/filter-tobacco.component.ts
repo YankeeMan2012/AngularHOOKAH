@@ -82,4 +82,8 @@ export class FilterTobacco implements OnInit {
         }
     }
 
+    private goBack() {
+        history.back();
+    }
+
 }

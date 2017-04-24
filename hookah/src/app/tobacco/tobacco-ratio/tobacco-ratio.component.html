@@ -1,5 +1,5 @@
 <section id="tobaccoRatio">
-    <header><div class="back" routerLink="/tobacco-list"></div><span>Соотношение табаков</span></header>
+    <header><div class="back" (click)="goBack()"></div><span>Соотношение табаков</span></header>
     <div class="rangeBox">
         <div class="choice">
             <div *ngFor="let tobacco of tobaccos"

@@ -50,6 +50,10 @@ export class ChoiceTaste implements OnInit {
         taste.selected = !taste.selected;
         this.isSelected();
     }
+
+    private goBack() {
+        history.back();
+    }
     
 
 }

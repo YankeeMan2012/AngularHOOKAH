@@ -1,6 +1,9 @@
 .choiceSectionClass{
 	display: block;
 	overflow-x: hidden;
+	.hideSlider {
+		display: none;
+	}
 	.subHeader{
 		padding-top: 2vw;
 		height: 8vh;
@@ -9,20 +12,20 @@
 		span{ font-size: 6vw; line-height: 2; vertical-align: middle; color: #bd9d5e;}
 	}
 	.showBowl{
-		background: url(/img/domain/bowl.svg) center center / contain no-repeat;
-		&.active{background: url(/img/domain/bowl-bronze.svg) center center / contain no-repeat;}
+		background: url(/assets/img/domain/bowl.svg) center center / contain no-repeat;
+		&.active{background: url(/assets/img/domain/bowl-bronze.svg) center center / contain no-repeat;}
 	}
 	.showBowlFruit{
-		background: url(/img/domain/apple.svg) center center / contain no-repeat;
-		&.active{background: url(/img/domain/apple-bronze.svg) center center / contain no-repeat;}
+		background: url(/assets/img/domain/apple.svg) center center / contain no-repeat;
+		&.active{background: url(/assets/img/domain/apple-bronze.svg) center center / contain no-repeat;}
 	}
 	.sliderView{
-		background: url(/img/domain/slider.svg) center center / contain no-repeat;
-		&.active{background: url(/img/domain/slider-bronze.svg) center center / contain no-repeat;}
+		background: url(/assets/img/domain/slider.svg) center center / contain no-repeat;
+		&.active{background: url(/assets/img/domain/slider-bronze.svg) center center / contain no-repeat;}
 	}
 	.tileView{
-		background: url(/img/domain/tile.svg) center center / contain no-repeat;
-		&.active{background: url(/img/domain/tile-bronze.svg) center center / contain no-repeat;}
+		background: url(/assets/img/domain/tile.svg) center center / contain no-repeat;
+		&.active{background: url(/assets/img/domain/tile-bronze.svg) center center / contain no-repeat;}
 	}
 	i{ display: inline-block; width: 6vw; height: 6vw; margin: 0 2vw; vertical-align: middle;}
 
@@ -39,10 +42,6 @@
 			}
 			p.price{
 				color: #bd9d5e; font-size: 6vw;
-				//&:after{
-				//	content: ''; background: url(/img/domain/uah.svg) center center / contain no-repeat;
-				//	display: inline-block; width: 6vw; height: 5.5vw; vertical-align: top;
-				//}
 			}
 			p.description{ font-size: 4vw; line-height: 1.2; width: 80vw;margin-left: -12vw; margin-top: 5vw;}
 			.boxImg{
@@ -269,10 +268,20 @@
 		}
 	}
 
-
-	footer{ display: none; z-index: 1;}
+	footer {
+		transition: all .2s linear;
+		transform: translateY(100%);
+		z-index: 1;
+		opacity: 0;
+		&.footerUp {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
 	.static {
 		display: block;
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 

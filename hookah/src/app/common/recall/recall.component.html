@@ -10,7 +10,7 @@
             <p>{{review.text}}</p>
             <div class="evaluation">
                 <div class="stars disabled">
-                    <span *ngFor="let isActive of review.stars" [ngClass]="{active: isActive}"></span>
+                    <span *ngFor="let i of [1,2,3,4,5]" [ngClass]="{active: i <= review.rating}"></span>
                 </div>
             </div>
         </div>
@@ -20,11 +20,14 @@
         <form>
             <div class="evaluation">
                 <div class="stars">
-                    <input type="radio" name="star" value="1"><span></span>
-                    <input type="radio" name="star" value="2"><span></span>
-                    <input type="radio" name="star" value="3"><span></span>
-                    <input type="radio" name="star" value="4"><span></span>
-                    <input type="radio" name="star" value="5" checked><span class="active"></span>
+                    <ng-template ngFor let-star [ngForOf]="rating">
+                        <input [value]="star.value"
+                               [checked]="star.active"
+                               type="radio"
+                               name="star">
+                        <span (click)="buildRating(star)"
+                              [ngClass]="{active: star.active}"></span>
+                    </ng-template>
                 </div>
             </div>
             <div class="controls">
@@ -34,31 +37,31 @@
             </div>
         </form>
     </footer>
-    <!--<script>-->
-        <!--var Recall = {-->
-            <!--hundlers: {-->
-                <!--".stars&#45;&#45;not(.disabled) span:click" : function() {-->
-                    <!--$(this).closest('.stars').find('span').removeClass('active');-->
-                    <!--$(this).addClass('active').prev().prop('checked', true);-->
-                <!--}, // Управление оценкой(звезды)-->
-                <!--"#recall .comment:focus" : function() { -->
-                    <!--$(this).closest('.controls').addClass('open'); -->
-                    <!--$('#recall footer .evaluation').fadeIn(); -->
-                <!--},-->
-                <!--"#recall:click"          : function(e){ Recall.hideControls(e); },-->
-            <!--},-->
-            <!--hideControls: function (e) {-->
-                <!--var isFooter = $(e.target).closest('footer').length;-->
-                <!--if( !isFooter ) {-->
-                    <!--var footer = $('#recall footer');-->
-                    <!--footer.find('.controls').removeClass('open');-->
-                    <!--footer.find('.evaluation').fadeOut();-->
-                <!--}-->
-            <!--},-->
-            <!--successRecall: function () {-->
-                <!--$('.comment').val('');-->
-                <!--AppJS.showMessageSection('Спасибо за Ваш отзыв! Он будет опубликован после проверки модератором.');-->
-            <!--},-->
-        <!--}-->
-    <!--</script>-->
+    <script>
+        var Recall = {
+            hundlers: {
+                ".stars--not(.disabled) span:click" : function() {
+                    $(this).siblings('span').removeClass('active');
+                    $(this).prev().prop('checked', true);
+                }, // Управление оценкой(звезды)
+                "#recall .comment:focus" : function() {
+                    $(this).closest('.controls').addClass('open');
+                    $('#recall footer .evaluation').fadeIn();
+                },
+                "#recall:click"          : function(e){ Recall.hideControls(e); },
+            },
+            hideControls: function (e) {
+                var isFooter = $(e.target).closest('footer').length;
+                if( !isFooter ) {
+                    var footer = $('#recall footer');
+                    footer.find('.controls').removeClass('open');
+                    footer.find('.evaluation').fadeOut();
+                }
+            },
+            successRecall: function () {
+                $('.comment').val('');
+                AppJS.showMessageSection('Спасибо за Ваш отзыв! Он будет опубликован после проверки модератором.');
+            },
+        }
+    </script>
 </section>

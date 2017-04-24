@@ -11,12 +11,9 @@ var notify       = require("gulp-notify");
 var libsJs = [
     './node_modules/jquery/dist/jquery.min.js',
     './node_modules/swiper/dist/js/swiper.jquery.js',
-
-    // 'web/js/lib/jquery-2.1.4.min.js',
     './src/js/jquery-ui.min.js',
-    // 'web/js/lib/glide.min.js',
+    './src/js/glide.min.js',
     './src/js/jquery.ui.touch-punch.min.js',
-    // 'web/js/lib/swiper.jquery.min.js',
     // 'web/js/lib/maskedInput.js',
     // 'web/js/lib/detect.js',
 ];

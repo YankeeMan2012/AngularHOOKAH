@@ -1,39 +1,14 @@
 <section id="choiceTaste">
-    <header><div class="back" routerLink="/who-choice-tobacco"></div><span>Выбор табака</span></header><!--<div class="globalPrice">0</div>-->
+    <header><div class="back" (click)="goBack()"></div><span>Выбор табака</span></header>
     <div class="wrapper">
         <div class="taste">
             <h2>Вкус кальяна</h2>
             <p>Какой вкус кальяна Вы предпочитаете?</p>
-            <!--<?php $tags = \app\models\Tag::getTagsToClient() ?>-->
-            <!--<?php if ($tags): ?>-->
-            <!--<?php foreach ($tags as $tag): ?>-->
             <button *ngFor="let taste of tastes"
                     (click)="choiceTaste(taste)"
                     [ngClass]="{selected: taste.selected}"
                     class="btn">{{taste.title}}</button>
-            <!--<?php endforeach; ?>-->
-            <!--<?php else: ?>-->
-            <!--<button class="btn">Сладкий</button>-->
-            <!--<button class="btn">Горький</button>-->
-            <!--<?php endif; ?>-->
         </div>
     </div>
     <footer [ngClass]="{footerUp: isSelectedTaste}" routerLink="/price-category">Далее</footer>
-    <!--<script>-->
-        <!--var ChoiceTaste = {-->
-            <!--hundlers: {-->
-                <!--"#choiceTaste .btn:click"                        : function() { ChoiceTaste.choiceTaste($(this));}, // Выбор вкуса табака-->
-            <!--},-->
-            <!--choiceTaste: function ($btn) {-->
-                <!--$btn.toggleClass('selected');-->
-                <!--var section = $('#choiceTaste');-->
-                <!--var footer = section.find('footer');-->
-                <!--section.find('.selected').length ? footer.slideDown(300) : footer.slideUp(300);-->
-                <!--ORDER.taste = [];-->
-                <!--$btn.closest('.taste').find('.selected').each(function () {-->
-                    <!--ORDER.taste.push($(this).text());-->
-                <!--});-->
-            <!--},-->
-        <!--}-->
-    <!--</script>-->
 </section>

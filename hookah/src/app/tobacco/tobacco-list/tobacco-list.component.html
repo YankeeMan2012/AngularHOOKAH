@@ -11,7 +11,7 @@
     <header>
         <div *ngIf="!search"
              class="viewMain">
-            <div class="back" routerLink="/filter-tobacco"></div>
+            <div class="back" (click)="goBack()"></div>
             <span>Выбор табака</span>
             <div class="search"
                  (click)="search = !search"></div>

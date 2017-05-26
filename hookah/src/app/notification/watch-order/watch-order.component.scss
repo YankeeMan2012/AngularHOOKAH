@@ -1,0 +1,120 @@
+$background: #f5f5f5;
+$golden: #bd9d5e;
+$greyText: #9d9d9d;
+$cyanText: #b6d1f1;
+#watchOrder{
+	overflow-x: hidden;
+	padding-bottom: 10vh;
+	.orderWrapper:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	.head {
+		&:after {
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+		}
+		.order, .table {
+			width: 50%;
+			font: 5vw/5vw MyriadProRegular, sans-serif;
+			text-transform: uppercase;
+			box-sizing: border-box;
+			padding: 5vw 8vw 0 8vw;
+		}
+		.order{
+			float: left;
+		}
+		.table{
+			float: right;
+			text-align: right;
+		}
+	}
+	ul{
+		li {
+			&.tobaccoList .wrapper {
+				display: none;
+			}
+			&.serviceList .wrapper {
+				display: none;
+			}
+			.wrapper {
+				width: 100%;
+				position: relative;
+			}
+			.name {
+				text-transform: capitalize;
+				box-sizing: border-box;
+				padding: 2vw 0 0 13vw;
+				width: 60%;
+				display: inline-block;
+				font: 4vw/4vw MyriadProLight, sans-serif;
+				font-style: italic;
+			}
+			.price {
+				display: inline-block;
+				box-sizing: border-box;
+				font: 5vw/5vw MyriadProRegular, sans-serif;
+				color: $golden;
+				text-align: right;
+				width: 38%;
+				padding: 0 6vw;
+			}
+			&.label {
+				width: 100%;
+				color: $golden;
+				padding: 5vw 0 0 8vw;
+			}
+		}
+
+	}
+	.sale {
+		width: 100vw;
+		box-sizing: border-box;
+		text-align: right;
+		color: $golden;
+		font: 4vw/5vw MyriadProRegular, sans-serif;
+		padding: 8vw 8vw 0 0;
+	}
+	.summ {
+		box-sizing: border-box;
+		color: $golden;
+		width: 100%;
+		padding: 0 8vw 5vw;
+		text-align: right;
+		height: 15vw;
+		.result {
+			text-align: left;
+			display: inline-block;
+			float: left;
+			box-sizing: border-box;
+			text-transform: uppercase;
+			font: 5vw/10vw MyriadProRegular, sans-serif;
+		}
+		.price {
+			float: right;
+			display: inline-block;
+			font: 5vw/10vw MyriadProBold, sans-serif;
+			text-transform: uppercase;
+		}
+	}
+	.notExact {
+		display: none;
+		text-align: center;
+		margin-bottom: 20px;
+		font-family: MyriadProLight, sans-serif;
+		font-size: 16px;
+		font-style: italic;
+	}
+}
+
+@media screen and (min-height: 900px){
+	.label {
+		font-size: 28px;
+	}
+}

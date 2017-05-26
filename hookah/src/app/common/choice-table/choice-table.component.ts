@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { Key } from '../../shared/data/key'
 import { keys } from './keyboard'
-import { HttpService } from '../../shared/http.service'
+import { Storage } from '../../shared/storage.service'
 
 declare const $: any;
 
@@ -12,21 +12,14 @@ declare const $: any;
     templateUrl: 'choice-table.component.html',
     styleUrls: ['choice-table.component.scss'],
 })
-export class ChoiceTable implements OnInit {
-    test: any;
+export class ChoiceTable {
 
-    constructor(private router: Router, private httpService: HttpService) {}
+    constructor(private router: Router, private storage: Storage) {}
 
     private keyboard: Key[] = keys;
     private tableView: string = '';
     private tableNum: number;
     private isValidTable: boolean = true;
-
-    ngOnInit() {
-        this.httpService.getData('http://lviv23.hookah.loc/filter-tobacco?get-data-as=json').subscribe(
-            data => this.test = data
-        );
-    }
 
     private onKeyClick(key: Key): void {
         if (key.add) {
@@ -43,7 +36,7 @@ export class ChoiceTable implements OnInit {
             this.isValidTable = false;
         } else {
             this.tableNum = parseInt(this.tableView);
-            // console.log(this.tableNum);
+            this.storage.setAppData('table', this.tableNum);
             this.router.navigate(['/home']);
         }
     }

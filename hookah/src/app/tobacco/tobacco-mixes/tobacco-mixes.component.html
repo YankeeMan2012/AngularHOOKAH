@@ -1,0 +1,112 @@
+<!--$currency = Yii::$app->session->get('currency') ?? '';-->
+
+<section id="tobaccoMix" objs="TobaccoMix">
+    <header>
+        <div *ngIf="!search"
+             class="viewMain">
+            <div class="back" (click)="goBack()"></div>
+            <span>Выбор миксов</span>
+            <div class="search"
+                 (click)="search = !search"></div>
+        </div>
+        <div *ngIf="search"
+             class="viewSearch">
+            <input (input)="searchListVal($event.target.value)"
+                   type="text"
+                   class="searchInput"
+                   autofocus>
+            <div class="closeBtn"
+                 (click)="search = !search; searchListVal('')"></div>
+        </div>
+    </header>
+    <ul>
+        <li *ngFor="let mix of mixes"
+            [ngClass]="{selected: mix.selected, searchFiltration: mix.filtration}"
+            (click)="dropDown(dropdownBlock, mix)">
+        <p class="title">Микс "{{mix.name}}"</p>
+        <p class="add" (click)="selectMix($event, mix)"></p>
+        <div class="dropdownBlock"
+             [ngClass]="{open: mix.open}"
+             [ngStyle]="{height: mix.dropHeight + 'px'}"
+             #dropdownBlock>
+            <p *ngFor="let tobacco of mix.tobaccos" class="composition">
+                <span class="caption">{{tobacco.brand}}</span>
+                <span class="name"   >{{tobacco.model}}</span>
+                <span class="percent">{{tobacco.percent}}%</span>
+            </p>
+            <p class="priceMix">
+                <span class="caption">Стоимость</span>
+                <span class="name">{{mix.mixes_price}} грн.</span>
+            </p>
+            <p class="description">Описание</p>{{mix.description}}
+            <div class="priceCategory">
+                <i *ngFor="let i of [1,2,3,4,5]" [ngClass]="{active: i <= mix.rating}" class="coin"></i>
+            </div>
+        </div>
+        </li>
+    </ul>
+    <footer [ngClass]="{footerUp: true}" routerLink="/who-choice-bowl">Далее</footer>
+    <!--<script>-->
+        <!--var tMix = <?= json_encode($data['mixes'] ?? []) ?>;-->
+        <!--var TobaccoMix = {-->
+            <!--hundlers: {-->
+                <!--"#tobaccoMix li:click"       : function() { $(this).children('.dropdownBlock').slideToggle(300).closest('li').toggleClass('open');}, // Описание табака-->
+                <!--"#tobaccoMix li .add:click"  : function(e){ TobaccoMix.choiceMix(this); e.stopPropagation(); },  // Выбр микса-->
+                <!--'#searchMix:input'           : function() { AppJS.searchListVal(this, '.title') }, // Поиск микса-->
+            <!--},-->
+            <!--ready: function () {-->
+                <!--if (APP.tobaccoMix != '') {-->
+                    <!--$('[data-id="'+ APP.tobaccoMix +'"]').addClass('selected');-->
+                    <!--$('footer').slideDown(300);-->
+                <!--}-->
+            <!--},-->
+            <!--choiceMix: function(el) {-->
+                <!--var li = $(el).closest('li');-->
+                <!--var footer = $('footer');-->
+                <!--var id = +li.attr('data-id');-->
+                <!--li.toggleClass('selected');-->
+                <!--if ( !li.hasClass('selected') ) {-->
+                    <!--footer.slideUp(300);-->
+                    <!--TobaccoMix.toAPP(id, true);-->
+                <!--} else {-->
+                    <!--li.siblings('.selected').removeClass('selected');-->
+                    <!--footer.slideDown(300);-->
+                    <!--TobaccoMix.toAPP(id);-->
+                <!--}-->
+                <!--TobaccoMix.toORDER(id);-->
+                <!--TobaccoMix.recountPrice();-->
+            <!--},-->
+            <!--recountPrice: function () {-->
+
+            <!--},-->
+            <!--toORDER: function (id) {-->
+                <!--var t = tMix[id].tobaccos;-->
+                <!--ORDER.tobacco = {};-->
+                <!--for( var i = 0; i < t.length; i ++ ) {-->
+                    <!--ORDER.tobacco[t[i].tobacco_id] = t[i].percent;-->
+                <!--}-->
+            <!--},-->
+            <!--toAPP: function (id, isRemove) {-->
+                <!--if (isRemove)  {-->
+                    <!--delete APP.tobacco[id];-->
+                    <!--APP.tobaccoMix = '';-->
+                    <!--APP.prices.tobacco = 0;-->
+                <!--} else {-->
+                    <!--APP.tobaccoMix = '';-->
+                    <!--APP.tobaccoMix = id;-->
+                    <!--APP.prices.tobacco = +tMix[id].mixes_price;-->
+
+                    <!--var t = tMix[id].tobaccos;-->
+                    <!--APP.tobacco = {};-->
+                    <!--for( var i = 0; i < t.length; i ++ ) {-->
+                        <!--APP.tobacco[t[i].tobacco_id] = {-->
+                            <!--brand: t[i].brand,-->
+                            <!--model: t[i].model,-->
+                            <!--taste: t[i].taste,-->
+                        <!--};-->
+                    <!--}-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+</section>

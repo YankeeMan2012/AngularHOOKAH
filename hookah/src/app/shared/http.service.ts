@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Storage } from './storage.service'
+import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -17,6 +18,19 @@ export class HttpService {
             })
             .catch((error: any) => {
                 return error;
+            });
+    }
+
+    public postData(url: string, body: any) {
+
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+        return this.http.post(url, body.toString(), {headers: headers})
+            .map((resp:Response) => {
+                return resp.json();
+            })
+            .catch((error: any) => {
+                return Observable.throw(error);
             });
     }
 
@@ -67,6 +81,12 @@ export class HttpService {
         this.getData('http://lviv23.hookah.loc/choice-filler?get-data-as=json').subscribe(
             data => {
                 this.storage.setData('fillers', data.fillers);
+            }
+        );
+
+        this.getData('http://lviv23.hookah.loc/choice-services?get-data-as=json').subscribe(
+            data => {
+                this.storage.setData('services', data.addServices);
             }
         );
 

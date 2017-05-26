@@ -30,6 +30,8 @@ import {WhoChoiceHookah} from './hookah/who-choice-hookah/who-choice-hookah.comp
 import {ChoiceHookah} from './hookah/choice-hookah/choice-hookah.component';
 import {WhoChoiceFiller} from './filler/who-choice-filler/who-choice-filler.component';
 import {ChoiceFiller} from './filler/choice-filler/choice-filler.component';
+import {ChoiceServices} from './services/choice-services/choice-services.component';
+import { WatchOrder } from './notification/watch-order/watch-order.component';
 
 const appRoutes: Routes = [
     {path: '', component: ChoiceTable},
@@ -52,6 +54,8 @@ const appRoutes: Routes = [
     {path: 'choice-hookah', component: ChoiceHookah},
     {path: 'who-choice-filler', component: WhoChoiceFiller},
     {path: 'choice-filler', component: ChoiceFiller},
+    {path: 'choice-services', component: ChoiceServices},
+    {path: 'watch-order', component: WatchOrder},
     {path: '**', component: NotFound}
 ];
 
@@ -78,7 +82,9 @@ const appRoutes: Routes = [
         WhoChoiceHookah,
         ChoiceHookah,
         WhoChoiceFiller,
-        ChoiceFiller
+        ChoiceFiller,
+        ChoiceServices,
+        WatchOrder
     ],
     imports: [
         BrowserModule,

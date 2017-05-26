@@ -1,0 +1,28 @@
+<section id="whoChoiceBowlLid" class="whoChoice">
+    <header>
+        <div class="back" (click)="goBack()"></div>
+        <span>Кто выберет<br>шахту кальяна?</span>
+        <div class="globalPrice">0</div>
+    </header>
+    <ul>
+        <li routerLink="/who-choice-filler" class="tapEffect">
+            <h2>На усмотрение кальянщика</h2>
+            <p>Наш кальянщик сам выбирает шахту кальяна</p>
+        </li>
+        <li (click)="getHookahs()" class="tapEffect">
+            <h2>я выберу шахту кальяна сам</h2>
+            <p>Шахту кальяна выберете лично Вы!</p>
+        </li>
+    </ul>
+    <!--<script>-->
+    <!--var WhoChoiceLid = {-->
+    <!--hundlers: {-->
+    <!--".js-chooseBowlLid:click"    : function() { WhoChoiceLid.getBowlLid();}, // Динамическая загрузка секций выбора накрытия и кальяна-->
+    <!--},-->
+    <!--getBowlLid: function() {-->
+    <!--var bowlId = ORDER.bowl || 0;-->
+    <!--Rqst.get({url: '/choice-bowl-lid/' + bowlId, writeHistory: true});-->
+    <!--},-->
+    <!--}-->
+    <!--</script>-->
+</section>

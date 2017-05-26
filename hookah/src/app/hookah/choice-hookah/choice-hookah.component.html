@@ -1,0 +1,73 @@
+<!--<?php-->
+
+<!--/** @var $data */-->
+<!--$currency = Yii::$app->session->get('currency') ?? '';-->
+
+<!--?>-->
+<section [ngClass]="{cardView: !slideView}" id="choiceHookah" class="choiceSectionClass">
+    <header><div class="back" (click)="goBack()"></div>
+        <span>Выбор кальяна</span>
+        <div class="globalPrice">0</div>
+    </header>
+    <div class="subHeader">
+        <div class="sliderOrTile" (click)="switchView()">
+            <i [ngClass]="{active: slideView}" class="sliderView"></i>
+            <span>/</span>
+            <i [ngClass]="{active: !slideView}" class="tileView"></i>
+        </div>
+    </div>
+    <div [ngClass]="{showSlider: showSlider}"
+         id="hookahSlider"
+         class="glide slider productSlider">
+        <div class="glide__track js-slide-wrap">
+            <div *ngFor="let hookah of hookahs"
+                 [ngClass]="{selected: hookah.selected}"
+                 (click)="choiceHookah(hookah)"
+                 class="glide__slide js-slide">
+                <div class="lining"></div>
+                <p class="name">{{hookah.brand + ' ' + hookah.model}}</p>
+                <p class="price">{{hookah.additional_price + 'грн.'}}</p>
+                <div class="boxImg">
+                    <img *ngIf="hookah.photo" src="./assets/{{hookah.photo}}">
+                    <ng-template [ngIf]="!hookah.photo">
+                        <img src="./assets/img/no-photo.svg">
+                        <div class="noPhoto">Фото кальяна отсутствует</div>
+                    </ng-template>
+                </div>
+                <p class="description">{{hookah.description}}</p>
+            </div>
+        </div>
+    </div>
+    <footer [ngClass]="{footerUp: selected}" routerLink="/who-choice-filler">Далее</footer>
+    <!--<script>-->
+        <!--var bowlLidData = <?= json_encode($data ?? []) ?>;-->
+
+        <!--var ChoiceLid = {-->
+            <!--hundlers: {-->
+                <!--"#bowlLidSlider .js-slide:click" : function() { AppJS.choiceProduct(this, true); }, // Выбор накрытия-->
+            <!--},-->
+            <!--ready: function () {-->
+                <!--if (ORDER.bowlLid) {-->
+                    <!--$('[data-id="'+ ORDER.bowlLid +'"]').addClass('selected');-->
+                    <!--$('footer').slideDown(300);-->
+                <!--}-->
+
+                <!--var temp = {};-->
+                <!--for (var i = 0; i < bowlLidData.length; i++) {-->
+                    <!--temp[bowlLidData[i].bowl_lid_id] = bowlLidData[i];-->
+                <!--}-->
+                <!--bowlLidData = temp;-->
+            <!--},-->
+            <!--toAPP: function (id, isDelete) {-->
+                <!--if (!isDelete) {-->
+                    <!--APP.bowlLid.model = bowlLidData[id].model;-->
+                    <!--APP.bowlLid.brand = bowlLidData[id].brand;-->
+                    <!--APP.prices.bowlLid = +bowlLidData[id].additional_price;-->
+                <!--} else {-->
+                    <!--APP.bowlLid = {};-->
+                    <!--APP.prices.bowlLid = 0;-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+</section>

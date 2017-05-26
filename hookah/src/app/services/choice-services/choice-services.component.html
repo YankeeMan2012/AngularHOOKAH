@@ -1,0 +1,33 @@
+<section [ngClass]="{cardView: !slideView}" id="choiceServices" class="choiceSectionClass">
+    <header><div class="back" (click)="goBack()"></div><span>Выбор<br>доп. услуг</span><div class="globalPrice">0</div></header>
+    <div class="subHeader">
+        <div class="sliderOrTile" (click)="switchView()">
+            <i [ngClass]="{active: slideView}" class="sliderView"></i>
+            <span>/</span>
+            <i [ngClass]="{active: !slideView}" class="tileView"></i>
+        </div>
+    </div>
+    <div [ngClass]="{showSlider: showSlider}"
+         id="servicesSlider"
+         class="glide slider productSlider">
+        <div class="glide__track js-slide-wrap">
+            <div *ngFor="let service of services"
+                 [ngClass]="{selected: service.selected}"
+                 (click)="choiceServices(service)"
+                 class="glide__slide js-slide">
+                <div class="lining"></div>
+                <p class="name">{{service.model}}</p>
+                <p class="price">{{service.additional_price + 'грн.'}}</p>
+                <div class="boxImg">
+                    <img *ngIf="service.photo" src="./assets/{{service.photo}}">
+                    <ng-template [ngIf]="!service.photo">
+                        <img src="./assets/img/no-photo.svg">
+                        <div class="noPhoto">Фото наполнителя отсутствует</div>
+                    </ng-template>
+                </div>
+                <p class="description">{{service.description}}</p>
+            </div>
+        </div>
+    </div>
+    <footer class="static" routerLink="/watch-order">Далее</footer>
+</section>

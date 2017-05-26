@@ -1,0 +1,148 @@
+<!--<?php-->
+
+<!--/** @var $data */-->
+<!--use app\models\inventory\InventoryHelper;-->
+
+<!--$currency = Yii::$app->session->get('currency') ?? '';-->
+<!--if(isset($data['bowls'])) {-->
+<!--$id = '0';-->
+<!--$bowls = array_filter($data['bowls'],-->
+<!--function($i) use ($id){ return ($i['is_fruit'] == $id); }-->
+<!--);-->
+<!--$fruits = array_filter($data['bowls'],-->
+<!--function($i) use ($id){ return ($i['is_fruit'] !== $id); }-->
+<!--);-->
+<!--}-->
+
+<!--?>-->
+
+<section [ngClass]="{cardView: !slideView}" id="choiceBowl" class="choiceSectionClass">
+    <header><div class="back" (click)="goBack()"></div><span>Выбор чаши</span></header>
+    <div class="subHeader">
+        <div class="bowlOrFruit" (click)="bowlView = !bowlView; fruitView = !fruitView;">
+            <i [ngClass]="{active: bowlView}" class="showBowl"></i>
+            <span>/</span>
+            <i [ngClass]="{active: fruitView}" class="showBowlFruit"></i>
+        </div>
+        <div class="sliderOrTile" (click)="switchView()">
+            <i [ngClass]="{active: slideView}" class="sliderView"></i>
+            <span>/</span>
+            <i [ngClass]="{active: !slideView}" class="tileView"></i>
+        </div>
+    </div>
+    <div [ngClass]="{showSlider: showSlider, hideSlider: !bowlView}"
+         id="bowlSlider"
+         class="glide slider productSlider">
+        <div class="glide__track js-slide-wrap">
+            <div *ngFor="let bowl of bowls"
+                 [ngClass]="{selected: bowl.selected}"
+                 (click)="choiceBowl(bowl)"
+                 class="glide__slide js-slide">
+                <div class="lining"></div>
+                <p class="name">{{bowl.name + ' ' + bowl.model}}</p>
+                <p class="price">{{bowl.additional_price + 'грн.'}}</p>
+                <div class="boxImg">
+                    <img *ngIf="bowl.photo" src="./assets/{{bowl.photo}}">
+                    <ng-template [ngIf]="!bowl.photo">
+                        <img src="./assets/img/no-photo.svg">
+                        <div class="noPhoto">Фото чаши отсутствует</div>
+                    </ng-template>
+                </div>
+                <p class="description">{{bowl.description}}</p>
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="{showSlider: showSlider, hideSlider: !fruitView}"
+         id="bowlFruitSlider"
+         class="glide productSlider slider">
+        <div class="glide__track js-slide-wrap">
+            <div *ngFor="let fruit of fruits"
+                 [ngClass]="{selected: fruit.selected}"
+                 (click)="choiceBowl(fruit)"
+                 class="glide__slide js-slide">
+                <p class="name">{{fruit.name + ' ' + fruit.model}}</p>
+                <p class="price">{{fruit.additional_price + 'грн.'}}</p>
+                <div class="boxImg">
+                    <img *ngIf="fruit.photo" src="./assets/{{fruit.photo}}">
+                    <ng-template [ngIf]="!fruit.photo">
+                        <img src="./assets/img/no-photo.svg">
+                        <div class="noPhoto">Фото чаши отсутствует</div>
+                    </ng-template>
+                </div>
+                <p class="description">{{fruit.description}}</p>
+            </div>
+        </div>
+    </div>
+    <footer [ngClass]="{footerUp: selected}" (click)="next()">Далее</footer>
+    <!--<script>-->
+        <!--var bowlData = <?= json_encode($data['bowls'] ?? []) ?>;-->
+<!---->
+        <!--var ChoiceBowl = {-->
+            <!--hundlers: {-->
+                <!--".bowlOrFruit:click"            : function() { ChoiceBowl.switchBowlOrFruit(this); }, // Прячем фрукты/чаши, показываем чаши/фрукты-->
+                <!--"#choiceBowl .js-slide:click"   : function() { AppJS.choiceProduct(this, true); }, // Выбор чаши-->
+            <!--},-->
+            <!--ready: function () {-->
+                <!--$('#bowlFruitSlider').hide();-->
+                <!--if (ORDER.bowl) {-->
+                    <!--var bowl = $('[data-id="'+ ORDER.bowl +'"]');-->
+                    <!--if (bowl.closest('#bowlFruitSlider').length) {-->
+                        <!--ChoiceBowl.switchBowlOrFruit($('.bowlOrFruit'));-->
+                    <!--}-->
+                    <!--bowl.addClass('selected');-->
+                    <!--$('footer').slideDown(300);-->
+                <!--}-->
+<!---->
+                <!--var temp = {};-->
+                <!--for (var i = 0; i < bowlData.length; i++) {-->
+                    <!--temp[bowlData[i].item_id] = bowlData[i];-->
+                <!--}-->
+                <!--bowlData = temp;-->
+            <!--},-->
+            <!--switchBowlOrFruit: function (el) {-->
+                <!--$(el).find('.showBowl, .showBowlFruit').toggleClass('active');-->
+                <!--$('.js-slide.selected').removeClass('selected');-->
+                <!--var bowlSlider = $('#bowlSlider');-->
+                <!--var fruitSlider = $('#bowlFruitSlider');-->
+                <!--if ($(el).find('.showBowl').hasClass('active')) {-->
+                    <!--bowlSlider.show();-->
+                    <!--fruitSlider.hide();-->
+                <!--} else {-->
+                    <!--bowlSlider.hide();-->
+                    <!--fruitSlider.show();-->
+                <!--}-->
+                <!--$('#choiceBowl footer').slideUp(300);-->
+            <!--},-->
+            <!--toAPP: function (id, isDelete) {-->
+                <!--if (!isDelete) {-->
+                    <!--APP.bowl.model = bowlData[id].model;-->
+                    <!--APP.bowl.name = bowlData[id].name;-->
+                    <!--APP.prices.bowl = +bowlData[id].additional_price;-->
+                    <!--// Цена табака по граммам-->
+                    <!--if (!AppJS.enablePriceCat) {-->
+                        <!--if (ORDER.bowl != '' && Object.keys(ORDER.tobacco).length) {-->
+                            <!--var fd = new FormData();-->
+                            <!--for( var id in ORDER.tobacco) {-->
+                                <!--fd.append('tobacco[]', id + ':' + ORDER.tobacco[id]);-->
+                            <!--}-->
+                            <!--fd.append('bowlId', ORDER.bowl);-->
+                            <!--fd.append('filling', ORDER.strength.id);-->
+                            <!--fd.append('ajReqMeth', 'calculateTobaccos');-->
+                            <!--Rqst.post({data: fd, url: '/filtration', success:function(res) {-->
+                                <!--if(res && res.backData && res.backData.tobaccoPrice){-->
+                                    <!--APP.prices.tobacco = Number(res.backData.tobaccoPrice);-->
+                                    <!--AppJS.globalPriceToApp();-->
+                                <!--}-->
+                            <!--}});-->
+                        <!--} else {-->
+                            <!--console.warn('Цена по граммам не посчиталась. Не выбрана чаша или табак!');-->
+                        <!--}-->
+                    <!--}-->
+                <!--} else {-->
+                    <!--APP.prices.bowl = 0;-->
+                    <!--APP.bowl = {};-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+<!--//    </script>-->
+</section>

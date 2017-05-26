@@ -1,0 +1,275 @@
+<!--<?php-->
+
+<!--/** @var $data */-->
+<!--$currency       = Yii::$app->session->get('currency') ?? '';-->
+
+<!--?>-->
+
+<section class="scrollSection" id="watchOrder">
+    <header><div class="back" (click)="goBack()"></div><span>Просмотр заказа</span></header>
+    <div class="orderWrapper">
+        <form action="/order" method="create" class="orderWrapper">
+            <input class="place" type="hidden" name="place" value="">
+            <input class="taste js-taste" type="hidden" name="taste" value="">
+            <!--<?php if(isset(Yii::$app->user->id)): ?>-->
+            <input type="hidden" name="customer" value="<?= Yii::$app->user->id; ?>">
+            <!--<?php endif; ?>-->
+            <div class="head">
+                <div class="order">Заказ №<span>1</span></div>
+                <div class="table">Столик №<span>{{tableNum}}</span></div>
+            </div>
+            <ul>
+                <li class="label">Табак</li>
+                <li class="tobaccoList">
+                    <div *ngFor="let tobacco of tobaccos" class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                </li>
+                <li class="label">Способ забивки</li>
+                <li class="methodList">
+                    <div class="wrapper ">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="fillingPosition" value="">
+                    </div>
+                </li>
+                <li class="label">Крепость</li>
+                <li class="strengthList">
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="filling" value="">
+                    </div>
+                </li>
+                <li class="label">Чаша</li>
+                <li class="bowlList">
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="bowl" value="">
+                    </div>
+                </li>
+                <li class="label">Способ накрытия</li>
+                <li class="lidList">
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="bowlLid" value="">
+                    </div>
+                </li>
+                <li class="label">Кальян</li>
+                <li class="hookahList">
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="hookah" value="">
+                    </div>
+                </li>
+                <li class="label">Наполнение</li>
+                <li class="filList">
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="filler" value="">
+                    </div>
+                </li>
+                <li class="label">Дополнительные услуги</li>
+                <li class="serviceList">
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                    <div class="wrapper">
+                        <span class="name"></span>
+                        <span class="price"></span>
+                        <input type="hidden" name="" value="">
+                    </div>
+                </li>
+            </ul>
+            <!--<?php $discount = Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->discount; ?>-->
+            <div class="sale">Скидка <span><?= $discount ?></span>%</div>
+            <div class="summ">
+                <div class="result">Итого</div>
+                <div class="price"> <?= $currency ?></div>
+            </div>
+            <div class="notExact">Цена может варьироваться</div>
+            <footer onclick="" success-submit-func="WatchOrder.successSubmitOrder" type="submit" go-to="hookahTimer">Заказать</footer>
+        </form>
+    </div>
+    <!--<script>-->
+        <!--var WatchOrder = {-->
+            <!--ready: function() {-->
+                <!--var isFullOrder = true;-->
+                <!--var orderNum = 1;-->
+                <!--for (var key in APP.timer.timers) {-->
+                    <!--if (APP.timer.timers[key] !== true) {-->
+                        <!--orderNum++;-->
+                    <!--}-->
+                <!--}-->
+                <!--var taste = '';-->
+                <!--if (ORDER.taste.length) {-->
+                    <!--taste = 'Вкус';-->
+                    <!--for (var i = 0; i < ORDER.taste.length; i++) {-->
+                        <!--taste += ' - ' + ORDER.taste[i];-->
+                    <!--}-->
+                    <!--taste += ';';-->
+                <!--}-->
+                <!--if (ORDER.priceCat != '') {-->
+                    <!--taste += ' Ценовая категория - ' + ORDER.priceCat + ';';-->
+                <!--}-->
+
+
+                <!--var order = $('#watchOrder');-->
+
+                <!--order.find('input.place').val(ORDER.placeNum);-->
+                <!--order.find('.table span').text(ORDER.placeNum);-->
+                <!--order.find('.order span').text(orderNum);-->
+                <!--order.find('.js-taste').val(taste);-->
+
+
+
+                <!--var tobacco = order.find('.tobaccoList .wrapper');-->
+                <!--var counter = 0;-->
+                <!--for (var id in ORDER.tobacco) {-->
+                    <!--$('.tobaccoList .amount').removeClass('amount').text('');-->
+                    <!--var thisT = tobacco.eq(counter);-->
+                    <!--var nameT = APP.tobacco[id].brand + ' ' + APP.tobacco[id].model + ' ' + APP.tobacco[id].taste;-->
+                    <!--thisT.find('.name').text(nameT);-->
+                    <!--thisT.find('.price').text(APP.prices.tobacco + AppJS.currency).addClass('amount');-->
+                    <!--thisT.find('input').attr('name', 'tobacco[]').val(id + ':' + ORDER.tobacco[id]);-->
+                    <!--thisT.show();-->
+                    <!--counter++;-->
+                <!--}-->
+                <!--if (!counter) {-->
+                    <!--tobacco.eq(0).show().find('.name').text('На усмотрение кальянщика');-->
+                    <!--isFullOrder = false;-->
+                <!--}-->
+
+                <!--var method = order.find('.methodList .wrapper');-->
+                <!--var methodName = ORDER.method == 'sector' ? 'Секторами' : ORDER.method == 'layer' ?-->
+                    <!--'Слоями' : ORDER.method == 'mix' ? 'Микс' : 'На усмотрение кальянщика';-->
+                <!--method.find('.name').text(methodName);-->
+                <!--method.find('input').val(ORDER.method);-->
+
+                <!--var strength = order.find('.strengthList .wrapper');-->
+                <!--strength.find('.name').text(ORDER.strength.name || 'На усмотрение кальянщика');-->
+                <!--strength.find('input').val(ORDER.strength.id);-->
+
+                <!--var bowl = order.find('.bowlList .wrapper');-->
+                <!--var bowlName = ORDER.bowl != '' ? (APP.bowl.name ? APP.bowl.name + ' ' : '') + APP.bowl.model : 'На усмотрение кальянщика';-->
+                <!--var bowlPrice = ORDER.bowl != '' ? APP.prices.bowl + AppJS.currency : '';-->
+                <!--bowl.find('.name').text(bowlName);-->
+                <!--bowl.find('.price').text(bowlPrice);-->
+                <!--bowl.find('input').val(ORDER.bowl);-->
+                <!--if (ORDER.bowl === '') isFullOrder = false;-->
+
+
+                <!--var bowlLid = order.find('.lidList .wrapper');-->
+                <!--var bowlLidName = ORDER.bowlLid != '' ? APP.bowlLid.brand + ' ' + APP.bowlLid.model : 'На усмотрение кальянщика';-->
+                <!--var bowlLidPrice = ORDER.bowlLid != '' ? APP.prices.bowlLid + AppJS.currency : '';-->
+                <!--bowlLid.find('.name').text(bowlLidName);-->
+                <!--bowlLid.find('.price').text(bowlLidPrice);-->
+                <!--bowlLid.find('input').val(ORDER.bowlLid);-->
+                <!--if (ORDER.bowlLid === '') isFullOrder = false;-->
+
+                <!--var hookah = order.find('.hookahList .wrapper');-->
+                <!--var hookahName = ORDER.hookah != '' ? APP.hookah.brand + ' ' + APP.hookah.model : 'На усмотрение кальянщика';-->
+                <!--var hookahPrice = ORDER.hookah != '' ? APP.prices.hookah + AppJS.currency : '';-->
+                <!--hookah.find('.name').text(hookahName);-->
+                <!--hookah.find('.price').text(hookahPrice);-->
+                <!--hookah.find('input').val(ORDER.hookah);-->
+                <!--if (ORDER.hookah === '') isFullOrder = false;-->
+
+                <!--var filler = order.find('.filList .wrapper');-->
+                <!--var fillerName = ORDER.filler != '' ? APP.filler.model : 'На усмотрение кальянщика';-->
+                <!--var fillerPrice = ORDER.filler != '' ? APP.prices.filler + AppJS.currency : '';-->
+                <!--filler.find('.name').text(fillerName);-->
+                <!--filler.find('.price').text(fillerPrice);-->
+                <!--filler.find('input').val(ORDER.filler);-->
+                <!--if (ORDER.filler === '') isFullOrder = false;-->
+
+                <!--var services = order.find('.serviceList .wrapper');-->
+                <!--var s = 0;-->
+                <!--for (s; s < ORDER.services.length; s++) {-->
+                    <!--var thisS = services.eq(s);-->
+                    <!--var idS = ORDER.services[s];-->
+                    <!--var nameS = APP.services[idS].name;-->
+                    <!--var type = APP.services[idS].typeId === 6 ? 'hose[]' : 'service[]';-->
+                    <!--thisS.find('.name').text(nameS);-->
+                    <!--thisS.find('.price').text(APP.services[idS].price + AppJS.currency);-->
+                    <!--thisS.find('input').attr('name', type).val(idS);-->
+                    <!--thisS.show();-->
+                <!--}-->
+                <!--if (!s) {-->
+                    <!--services.eq(0).show().find('.name').text('Не выбраны');-->
+                <!--}-->
+
+                <!--order.find('.summ .price').text((APP.prices.globalPrice || '-') + ' ' + AppJS.currency);-->
+                <!--if (!isFullOrder) $('.notExact').show();-->
+            <!--},-->
+            <!--successSubmitOrder: function (id) { // Используется при успешной отправке заказа-->
+                <!--Rqst.get({url: '/hookah-timer', notBlock: true, writeHistory: true, afterSuccess: function () {-->
+                    <!--AppJS.readyStartTimer(id.success);-->
+                <!--}});-->
+            <!--},-->
+        <!--}-->
+    <!--</script>-->
+</section>

@@ -56,6 +56,7 @@ export class TobaccoList implements OnInit, OnDestroy {
     private selectTobacco(e, tobacco): void {
         e.stopPropagation();
         if (this.selectedCounter < 4 || tobacco.selected) {
+            this.storage.setAppData('tobaccoRatio', null); // При изменении состояния табаков очищаем соотношение
             tobacco.selected = !tobacco.selected;
             tobacco.selected ? this.selectedCounter++ : this.selectedCounter--;
         } else {
